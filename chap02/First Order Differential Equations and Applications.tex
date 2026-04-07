@@ -1,0 +1,90 @@
+\setcounter{chapter}{1}
+\chapter{First Order Differential Equations}
+\mtcsetoffset{minitoc}{-1em}
+% \mtcsetpagenumbers{minitoc}{off}
+\minitoc
+
+\section{Separation of Variables}
+Certain first order equations, whether linear or nonlinear, can be solved by direct integration. The following definition identifies those first order equations for which general solutions can be obtained in this way.
+
+\begin{leftbar}
+	\begin{definition}\label{def-seperable}
+		A  first order differential equation of the form \[\frac{dy}{dx} = f(x, y)\]  is  said to be \textbf{\textit{separable}} if it can be expressed as
+		\begin{equation}\label{sec-2-1-1}
+			\frac{dy}{dx} = g(x)\,h(y),
+		\end{equation} 
+		where $g$ is a function of $x$  and $h$ is a function $y$.
+	\end{definition}
+\end{leftbar}
+Separable equations of the form \eqref{sec-2-1-1} are solved by separating the variables and then integrating. Specifically, dividing both sides of \eqref{sec-2-1-1} by \(h(y)\) yields
+\begin{equation}\label{sec-2-1-2}
+	\frac{1}{h(y)}\frac{dy}{dx} = g(x).
+\end{equation}
+Integrating both sides of \eqref{sec-2-1-2} with respect to \(x\) gives
+\[
+\int \frac{1}{h(y)}\frac{dy}{dx}\, dx = \int g(x)\, dx + C,
+\]
+where \(C\) is an arbitrary constant. Since \( \frac{dy}{dx}\,dx = dy \), the differential of \(y\), the preceding equation can be rewritten equivalently as
+\begin{equation}\label{sec-2-1-3}
+	\int \frac{1}{h(y)}\,dy = \int g(x)\,dx + C,
+\end{equation}
+which presents a one-parameter family of solutions of \eqref{sec-2-1-1}, but it may not represent the  general solution of \eqref{sec-2-1-1}.
+The reason is that, in deriving \eqref{sec-2-1-2}, we  divided by \(h(y)\),  thereby excluding constant solutions \(y = k\) for which \(h(k)\) = 0). It can be verified that such constant functions satisfy \eqref{sec-2-1-1}. Hence, the general solution of \eqref{sec-2-1-1} consists of the one-parameter family \eqref{sec-2-1-3} together with all constant solutions \(y = k\) such that \(h(k) = 0\).
+
+\begin{example}
+	Find the general solution of \(\frac{dy}{dx} = 4xy^2\)
+\end{example}
+\begin{solution}
+	
+	The equation is separable and may be written as
+	\begin{equation}\label{ex-2-2-1}
+	\frac{1}{y^2}\frac{dy}{dx} = 4x.
+	\end{equation}
+	In dividing by \(y\), the constant solution \(y=0\) is excluded from the separation process; however, direct substitution shows that \(y=0\) does satisfy the differential equation and therefore $y =0$ is a solution. To determine the nonconstant solutions, we integrate \eqref{ex-2-2-1} both sides with respect to $x$:
+	\[
+	\int \frac{1}{y^2}\frac{dy}{dx}\, dx = \int 4x\, dx,
+	\]
+	that is,
+	\[
+	\int y^{-2}\, dy =  \int 4x\, dx,
+	\]
+	which yields
+		\[
+	 -y^{-1}=  2x^2+C,
+	\]
+	where $C$ is an arbitrary constant. Solving for $y$ gives
+	\[y =  \frac{-1}{2x^2 +C}.\]
+	Thus, the general solution of the differential equation consists of the one-parameter family
+	\[
+	y = \frac{-1}{2x^2 + C},
+	\]
+	together with the trivial solution \(y = 0\). We typically write the general solution   as
+	\[
+	\begin{cases}
+		y = \displaystyle\frac{-1}{2x^2 + C},\\
+		y = 0,
+	\end{cases}
+	\]
+	where \(C\) is an arbitrary constant.
+	
+	
+\end{solution}
+
+ 
+\begin{example}
+	content...
+\end{example}
+
+\begin{example}
+	content...
+\end{example}
+
+
+
+\section{Integrating Factors}
+
+\section{Slope Fields}
+
+\section{Euler’s Method}
+
+\section{Applications}
