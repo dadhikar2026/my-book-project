@@ -1,0 +1,1136 @@
+\chapter{Sequences and Series of Functions}
+\mtcsetoffset{minitoc}{-1em}
+ % \mtcsetpagenumbers{minitoc}{off}
+
+    \minitoc %This TOC should only show the two subsubsection below!
+
+
+
+
+The study of sequences and series of functions provides powerful tools that are needed for analyzing complicated functions and designing approximations of such functions when their direct calculation is challenging or  impossible. In Section~\ref{numerical-series-convergence}, we give a brief presentation of some useful  tests for convergence and divergence of numerical series. We then begin 
+with the convergence of power series in Section~\ref{power-series-1}. In Section~\ref{pointwise-uniform}, we define two kinds of convergence of sequences of functions; namely, pointwise convergence and uniform convergence. The pointwise convergence appears to be rather general and lacks important properties but uniform convergence is more powerful as we shall see in Section~\ref{uniform-convergence}. Finally, in Section~\ref{power-series-2}, we return to power series and develop some basic proprieties by applying the results obtained in Section~\ref{uniform-convergence}  on uniformly convergent series of functions.  
+
+\section{Infinite Series}\label{numerical-series-convergence}
+
+
+\begin{definition}\label{infinite-series}
+    Let $\{a_n\}$ be a sequence of real numbers and $s_n$ denote the sum of the first $n$ terms of the sequence, that is, 
+    \[s_n= \sum_{k=1}^na_k =a_1+  \dots +a_n.\]   Then  $\{s_n\}$ is referred to as  the \textbf{infinite series} associated with  $\{a_n\},$ and we denote the infinite series $\{s_n\}$ by $\sum_{n=1}^\infty a_n$  or simply by $\sum a_n.$ The numbers $s_n$'s are called the \textbf{partial sums} of the series $\sum_{n=1}^\infty a_n.$
+    \begin{enumerate}[label=(\roman*),nolistsep]
+        \item If $\{s_n\}$ converges to a real number $s,$  we say that the series $\sum_{n=1}^\infty a_n$ is \textbf{convergent}  and $s$ is called the \textbf{sum} of the series. We write $\sum_{n=1}^\infty a_n =s.$
+        \item If $s_n\to +\infty,$ we say that the series $\sum_{n=1}^\infty a_n$ \textbf{diverges to $+\infty$} and write $\sum_{n=1}^\infty a_n =+\infty.$ Similarly, if $s_n\to -\infty,$ we say that the series $\sum_{n=1}^\infty a_n$ \textbf{diverges to $-\infty$} and write $\sum_{n=1}^\infty a_n =-\infty.$ 
+        \item If $\{s_n\}$ does not converge to any real number, we say that the series $\sum_{n=1}^\infty a_n$ is \textbf{divergent}.
+    \end{enumerate}
+\end{definition}
+
+It is standard to index the terms of a series beginning with $n=1.$ However, it is sometimes more convenient to begin indexing with an integer other than $1.$ If there is no risk for confusion, we may suppress the starting index and $\infty$ in  and  simply write a series as $\sum a_n$. 
+
+It  can be verified that the convergence or divergence of a series is unaffected whether we index the terms  from $n=1$ or from $n= \ell$ for some integer $\ell\in\mathbb Z.
+$ 
+
+\begin{example}
+    Consider the series $\sum_{n=1}^\infty\frac{1}{n(n+2)}.$ Then
+    \[s_n =\sum_{k=1}^n \left(\frac{1}{k}- \frac{1}{k+1}\right) =1-\frac{1}{n+1}.\]
+    Since $s_n\to 1,$ the series $\sum_{n=1}^\infty\frac{1}{n(n+2)}$ converges  and its sum is $1.$ 
+\end{example}
+
+\begin{example}
+    Consider the series $\sum_{n=1}^\infty\frac{1}{n}.$ Then
+    \[s_n =\sum_{k=1}^n \frac{1}{k} = 1+\frac12+\frac13+\dots+\frac{1}{n}\] is a strictly increasing sequence of real numbers.    For all $n\in\mathbb N,$
+    we have
+    \begin{align*}
+        s_{2^n}&= 1+\frac12 +\left(\frac13+\frac14\right)+\left(\frac15+\cdots+\frac18\right)+\dots+\left(\frac{1}{2^{n-1}+1}+\dots+\frac{1}{2^n}\right)\\
+        &>1+\frac12 +\left(\frac14+\frac14\right)+\left(\frac18+\cdots+\frac18\right)+\dots+\left(\frac{1}{2^n}+\dots+\frac{1}{2^n}\right)\\
+        &=1+\underbrace{\frac12+\dots+\frac12}_{\mbox{$n$ terms}}\\
+        &=1+\frac{n}{2}.
+    \end{align*}
+    This shows that the subsequence $\{s_{2^n}\}$ is not bounded, and therefore $\{s_n\}$ is not bounded. This shows that the series $\sum_{n=1}^\infty\frac{1}{n}$ is divergent. In fact, since $\{s_n\}$ is nondecreasing, it follows that $\sum_{n=1}^\infty\frac{1}{n} =+\infty.$ 
+\end{example}
+A large of class of convergent series is supplied by the geometric series discussed in the following example.
+
+\begin{example}
+    Consider the \textbf{geometric} series $\sum_{n=0}^\infty ar^n,$ where $a$ is a fixed nonzero real number and $r\in\mathbb R.$ To discuss for what values of $r$ the series converges, let 
+    \[s_n = \sum_{k=0}^nar^k.\] Then we have 
+    \[s_n = \begin{cases}
+        (n+1)a &\mbox{ if } r=1,\\
+        \frac{a(1-r^{n+1})}{1-r} &\mbox{ if } r\ne 1.
+    \end{cases}\]
+    For $r=-1,$ we have $s_n= 0$ if $n$ is odd and $s_n=a$ if $n$ is even. Therefore $\{s_n\}$ is divergent for $r=-1.$
+    It is now clear that $\{s_n\}$ is divergent for $r\in(-\infty, -1]\cup [1, \infty).$ On the other hand, the series $\sum_{n=0}^\infty ar^n$  converges to $a/(1-r)$ when $r\in (-1, 1).$ 
+\end{example}
+
+
+
+\begin{thmbar}
+    \begin{theorem}\label{linearity-series}
+        Suppose that $\sum a_n$ and $\sum b_n$ are convergent with sums $a$ and $b,$ respectively. Let $k\in\mathbb R$ be fixed. Then the following statements hold.
+        \begin{enumerate}[label=(\roman*), nolistsep]
+            \item $\sum (a_n+b_n) = a+b.$
+            \item $\sum (ka_n) = ka.$
+        \end{enumerate}
+    \end{theorem}
+\end{thmbar}
+\begin{proof}
+    Left as an exercise.
+\end{proof}
+
+\begin{thmbar}
+    \begin{theorem}[Cauchy Criterion for Convergence]\label{Cauchy-Criterion-series}
+        The infinite series $\sum a_n$ converges if and only if the Cauchy criterion for series holds, that is, for each $\varepsilon>0$ there exists $N\in \mathbb N$ such that for all $n, m\in \mathbb N,$
+        \[n\ge m\ge N \implies \abs{a_m+a_{m+1}+ \cdots+ a_n}<\varepsilon. \]
+    \end{theorem}
+\end{thmbar}
+\begin{proof}
+     Put $s_n := \sum_{k=1}^n a_k.$  Suppose that $\sum a_n$ converges.  Then $\{s_n\}$ converges and therefore it is Cauchy. Let $\varepsilon>0$ be given. Then there exists $N_0\in\mathbb N$ such that for all $n, m\in\mathbb N,$
+    \[ n,m\ge N_0\implies \abs{s_n-s_m}<\varepsilon.\]
+    In particular, for all $n,m\in\mathbb N,$
+    \begin{equation}\label{CCS1}
+        n>m\ge N_0\implies \abs{a_{m+1} + \cdots+ a_n}<\varepsilon.
+    \end{equation}
+    Define $N= N_0+1.$
+    Let $n, m\in\mathbb N$ be such that $n\ge m\ge N = N_0+1.$ Then $n>m-1\ge N_0,$ and therefore (\ref{CCS1}) yields
+    \[\abs{a_m+a_{m+1}+ \cdots+ a_n}<\varepsilon.\]
+    This proves that the Cauchy criterion for series holds.
+
+    To prove the converse, suppose that the Cauchy criterion for series holds. We prove that $\{s_n\}$ is a Cauchy sequence. Let $\varepsilon>0$ be given. Since the Cauchy criterion for series holds,  there exists $N_0\in \mathbb N\setminus\{1\}$ such that for all $n, m\in \mathbb N,$
+        \begin{equation}\label{CCS2}
+            n\ge m\ge N_0 \implies \abs{a_m+a_{m+1}+ \cdots+ a_n}<\varepsilon. 
+        \end{equation}
+   Define $N:= N_0-1.$  Let $n, m\in\mathbb N$ such that $n, m\ge N = N_0-1.$ We first assume  that $n>m.$ Then $n\ge m+1\ge N_0,$ and therefore (\ref{CCS2}) yields 
+   \[\abs{s_n-s_m}= \abs{a_{m+1}+\cdots+ a_n}< \varepsilon. \]
+   The case $m>n$ can be handled similarly, and the case $n=m$ is trivial. Thus, $\{s_n\}$ is Cauchy and therefore $\sum a_n$ converges.
+\end{proof}
+\begin{thmbar}
+    \begin{corollary}\label{divergence-test}
+        If $\sum a_n$ is convergent, then $\lim\limits_{n\to\infty} a_n =0.$
+    \end{corollary}
+\end{thmbar}
+\begin{proof}
+    Suppose that $\sum a_n$ is convergent. Let $\varepsilon>0$ be given. By Theorem~\ref{Cauchy-Criterion-series}, there exists $N\in\mathbb N$ such that for all $n\in\mathbb N,$
+    \[n\ge m\ge N \implies \abs{a_m+a_{m+1}+ \cdots+ a_n}<\varepsilon. \]
+In particular, for all $m,n\in\mathbb N$ with $m=n\ge N,$ we have
+$\abs{a_n}< \varepsilon.$ This implies that $\lim\limits_{n\to\infty} a_n =0.$   
+\end{proof}
+
+\begin{thmbar}
+    \begin{theorem}[Comparison Test]\label{comparison-test}
+    Let $\sum a_n$ and $\sum b_n$ be series of nonnegative terms. Then the following statements hold.
+    \begin{enumerate}[label = (\roman*)]
+        \item If $0\le b_n\le a_n$ for all $n$ and $\sum a_n$ converges, then $\sum b_n$ converges.
+        \item If $0\le a_n\le b_n$ for all $n$ and $\sum a_n$ diverges, then $\sum b_n$ diverges.
+    \end{enumerate} 
+    \end{theorem}
+\end{thmbar}
+\begin{proof}
+    Left as an exercise.
+\end{proof}
+
+\begin{xca}
+    Determine whether $\sum \frac{1}{(n+1)^2}$ converges.\newline [Hint: $0< \frac{1}{(n+1)^2} < \frac{1}{n(n+1)}$ for all $n.$]
+\end{xca}
+\begin{xca}
+    Determine whether $\sum_{n=2}^\infty \frac{1}{n-\sqrt{2}}$ converges.
+\end{xca}
+ 
+\begin{thmbar}
+    \begin{theorem}[Limit Comparison Test]
+    Let $\sum a_n$ and $\sum b_n$ be series of positive terms.  Suppose that $\lim\limits_{n\to\infty}(a_n/b_n)$ exists and is a positive  number. Then $\sum a_n$ converges if and only if $\sum b_n$ converges.
+    \end{theorem}
+\end{thmbar}
+
+\begin{proof}
+    Set $\ell := \lim\limits_{n\to\infty}(a_n/b_n)>0.$ Then there exists $N\in\mathbb N$ such that 
+    \[\frac{\ell}{2} b_n < a_n< \frac{3\ell}{2}b_n\] whenever $n\ge N.$ Applying Theorem~\ref{comparison-test}, it follows that $\sum a_n$ converges if and only if $\sum b_n$ converges.
+\end{proof}
+
+\begin{xca}
+    Determine whether $\sum 1/(e^n-n)$ converges.
+\end{xca}
+
+\begin{thmbar}
+    \begin{theorem}[Integral Test] Let $f:[1, \infty) \to [0, \infty)$ be a continuous function such that $f(x_2)\le f(x_1)$ whenever $x_1<x_2.$ Then 
+    $\sum_{n=1}^\infty f(n)$  converges if and only if $\int_1^\infty f(x) \, dx$ converges.
+    \end{theorem}
+\end{thmbar}
+\begin{proof}
+    Since $f:[1, \infty)\to [0, \infty)$ is continuous and nonincreasing, it follows that $\int_1^\infty f(x) \, dx$ converges if and only if $\{\int_1^{n+1} f(x) \, dx\}_{n=1}^\infty$ converges.
+
+    Let $a_n= f(n)$ and $b_n =\int_n^{n+1} f(x)\, dx.$ For all $n\in\mathbb N,$ we have
+    \[f(n+1) \le f(x)\le f(n)\] for all $x\in [n, n+1],$ which implies
+    \[f(n+1) \le \int_n^{n+1} f(x)\, dx \le f(n).\] Thus,
+    \[0\le a_{n+1} \le b_n \le a_n \quad\mbox{ for all }n\in \mathbb N.\] It now follows by Theorem~\ref{comparison-test} that $\sum a_n$ converges if and only if $\sum b_n.$
+\end{proof}
+\begin{xca} For $p\in (0, \infty),$
+    Show that the $p$-series $\sum_{n=1}^\infty \frac{1}{n^p}$ converges if and only if $p>1.$
+\end{xca}
+
+\begin{thmbar}
+    \begin{lemma}\label{even-odd-subsequence-limits}
+        Let $\ell\in\mathbb R$ and $\{a_n\}$ be a sequence  such that $\lim\limits_{n\to\infty}a_{2n}=\ell$ and $\lim\limits_{n\to\infty}a_{2n-1}=\ell.$  Then $\lim\limits_{n\to\infty}a_n=\ell.$ 
+    \end{lemma}
+\end{thmbar}
+\begin{proof}
+    Let $\varepsilon>0$ be given. Since $a_{2n}\to \ell,$ there exists $N_1\in\mathbb N$ such that 
+     \[\abs{a_{2n}-\ell}<\varepsilon \quad \mbox{ whenever } \quad  n\ge N_1.\]
+     Also, since  $a_{2n-1}\to \ell,$ there exists $N_2\in\mathbb N$ such that 
+     \[\abs{a_{2n-1}-\ell}<\varepsilon \quad \mbox{ whenever } \quad  n\ge N_2.\]
+     Put $N = \max\{2N_1, 2N_2-1\}.$ Let $n\in\mathbb N$ be such that $n\ge N.$ If $n$ is even, then $n = 2k$ for some $k\in\mathbb N.$  Since $n\ge 2N_1,$ we have $k\ge N_1,$ so that 
+     \[\abs{a_n-\ell}=\abs{s_{2k}-\ell} <\varepsilon.\]
+     If $n$ is odd, then $n= 2k-1$ for some $k\in\mathbb N.$ Since $n\ge 2N_2-1,$ we have $k\ge N_2,$ so that 
+     \[\abs{a_n-\ell}=\abs{a_{2k-1}-\ell} <\varepsilon.\]
+\end{proof}
+
+
+\begin{thmbar}
+    \begin{theorem}[Alternating Series Test]
+        Let $\{a_n\}_{n=1}^\infty$ be a sequence such that $0\le a_{n+1}\le a_n$ for all $n\ge 1$ and $\lim\limits_{n\to\infty}a_n=0.$ Then $\sum_{n=1}^\infty(-1)^{n+1}a_n$ converges.
+    \end{theorem}
+\end{thmbar}
+
+\begin{proof}
+    Put $s_n=\sum_{k=1}^n(-1)^{k+1}a_k.$ We  show that $\{s_{2n}\}$ and $\{s_{2n-1}\}$ converges to the same number. Since
+    \[s_{2n} = a_1-a_2+ a_3-a_4+\cdots+a_{2n-1}-a_{2n},\] we have
+    \[s_{2(n+1)}-s_{2n} = a_{2n+1}-a_{2n+2}\ge 0.\] This shows that $\{s_{2n}\}$ is nondecreasing. Moreover, since
+    \[s_{2n} = a_1-(a_2- a_3)-(a_4-a_5)-\cdots-(a_{2n-2}-a_{2n-1})-a_{2n}\le a_1\] for all $n,$ $\{s_{2n}\}$ is bounded above and therefore $\{s_{2n}\}$ converges. Let $\ell\in\mathbb R$ be such that $\lim\limits_{n\to\infty} s_{2n}=\ell.$
+    Since
+    $s_{2n}= s_{2n-1}-a_{2n}$ and $\lim\limits_{n\to\infty}a_n=0,$ it follows that $\lim\limits_{n\to\infty} s_{2n-1}=\lim\limits_{n\to\infty} s_{2n}=\ell.$ By Lemma~\ref{even-odd-subsequence-limits}, we obtain  $\lim\limits_{n\to\infty}s_n=\ell.$ Hence $\sum a_n$ converges.
+    
+    
+   %   We next show  that $\lim\limits_{n\to\infty} s_n=\ell.$  Let $\varepsilon>0$ be given. Since $s_{2n}\to \ell,$ there exists $N_1\in\mathbb N$ such that 
+   %   \[\abs{s_{2n}-\ell}<\varepsilon \quad \mbox{ whenever } \quad  n\ge N_1.\]
+   %   Also, since  $s_{2n-1}\to \ell,$ there exists $N_2\in\mathbb N$ such that 
+   %   \[\abs{s_{2n-1}-\ell}<\varepsilon \quad \mbox{ whenever } \quad  n\ge N_2.\]
+   %   Put $N = \max\{2N_1, 2N_2-1\}.$ Let $n\in\mathbb N$ be such that $n\ge N.$ If $n$ is even, then $n = 2k$ for some $k\in\mathbb N.$  Since $n\ge 2N_1,$ we have $k\ge N_1,$ so that 
+   %   \[\abs{s_n-\ell}=\abs{s_{2k}-\ell} <\varepsilon.\]
+   %   If $n$ is odd, then $n= 2k-1$ for some $k\in\mathbb N.$ Since $n\ge 2N_2-1,$ we have $k\ge N_2,$ so that 
+   %   \[\abs{s_n-\ell}=\abs{s_{2k-1}-\ell} <\varepsilon.\]
+   % Thus,$\lim\limits_{n\to\infty} s_n=\ell.$ 
+\end{proof}
+
+\begin{xca}
+    Show that $\sum_{n=1}^\infty (-1)^{n+1}/n$ converges.
+\end{xca}
+
+
+\begin{leftbar}
+    \begin{definition}
+      We say that  $\sum a_n$ is \textbf{converges absolutely} if $\sum |a_n|$ converges. If $\sum a_n$ converges and $\sum |a_n|$ diverges, then we say that $\sum a_n$ \textbf{converges conditionally}.
+    \end{definition}
+\end{leftbar}
+
+\begin{theorem}
+    If $\sum a_n$ converges absolutely, then $\sum a_n$ converges. 
+\end{theorem}
+\begin{proof}
+   A proof follows from Theorem~\ref{Cauchy-Criterion-series}. Details are left as an exercise.
+\end{proof}
+
+\begin{xca}
+    Determine whether the following series  converge absolutely or conditionally.\\
+    \begin{enumerate*}[label= (\roman*)]
+        \item $\sum_{n=1}^\infty (-1)^{n+1}/n$\qquad\qquad
+        \item $\sum_{n=1}^\infty (-1)^n/n^2$
+    \end{enumerate*}
+\end{xca}
+
+
+\begin{thmbar}
+    \begin{theorem}[Ratio Test]\label{ratio-test}
+    Let $\sum a_n$ be  a series with $a_n\ne 0$ for all $n.$ Then the following statements hold.
+    \begin{enumerate}[label =(\roman*), nolistsep]
+    \item If $\displaystyle\limsup_{n\to\infty}\abs{a_{n+1}/a_n} <1,$ then $\sum a_n$ converges absolutely.
+    \item If $\displaystyle\liminf_{n\to\infty}\abs{a_{n+1}/a_n} >1,$ then $\sum a_n$ diverges. 
+    \item If $\displaystyle\liminf_{n\to\infty}\abs{a_{n+1}/a_n} \le 1\le \limsup_{n\to\infty}\abs{a_{n+1}/a_n},$ then the test for convergence or divergence is inconclusive.
+    \end{enumerate}
+    \end{theorem}
+\end{thmbar}
+
+\begin{proof}
+   (i) Suppose that $ \displaystyle\limsup_{n\to\infty}\abs{a_{n+1}/a_n}<1.$ Choose a number $r$ such that $ \displaystyle\limsup_{n\to\infty}\abs{a_{n+1}/a_n}<r<1.$ Then there exists $N\in\mathbb N$ such that 
+   \(\abs{a_{n+1}/a_n}<r\) whenever  \(n\ge N.\) Therefore $|a_{n+1}|< r|a_n|$ whenever $n\ge N.$ Consequently,
+   \[|a_{N+k}| < r|a_{N+(k-1)}| < \cdots < r^k|a_N|\] for all $k\in\mathbb N.$ Since $r\in (0, 1),$  $\sum r^k$ converges. This implies that $\sum a_n$ converges absolutely.
+
+   (ii) Suppose that $ \displaystyle\liminf_{n\to\infty}\abs{a_{n+1}/a_n}>1.$ Then there exists $N\in\mathbb N$ such that 
+   $|a_{n+1}| > |a_n|$ whenever $n\ge N.$  By Corollary~\ref{divergence-test}, it follows that $\sum a_n$ diverges.
+
+   (iii) Both the series $\sum 1/n$ and $\sum 1/n^2$ satisfy $\lim\limits_{n\to\infty}\abs{a_{n+1}/a_n}=1.$ 
+   However, $\sum 1/n$ diverges and $\sum 1/n^2$  converges.
+\end{proof}
+
+
+
+\begin{thmbar} 
+    \begin{theorem}[Root Test]\label{root-test}
+       Let $\sum a_n$ be  a series and $\displaystyle\alpha = \limsup_{n\to\infty}\abs{a_n}^{1/n}.$
+        \begin{enumerate}[label=(\roman*), nolistsep]
+            \item If $\alpha <1,$ then $\sum a_n$ converges absolutely. 
+            \item If $\alpha>1,$ then $\sum a_n$ diverges. 
+            \item If $\alpha =1,$ then the test for convergence or divergence is inconclusive.
+        \end{enumerate}
+    \end{theorem}
+\end{thmbar}
+
+\begin{proof}
+   (i) Suppose that $\alpha<1.$ Choose $r\in (\alpha, 1).$ Then there exists $N_1\in\mathbb N$ such that 
+   $|a_n|^{1/n}< r$ whenever $n\ge N.$ This implies that 
+   $|a_n|< r^n$ whenever $n\ge N.$ 
+Since $\sum r^n$ converges, $\sum a_n$ converges absolutely.
+
+(ii) Suppose that $\alpha >1.$ Then there exists a subsequence $\{a_{n_k}\}$ of $\{a_n\}$ such that 
+$|a_{n_k}|^{1/n_k} >1$ for sufficiently large values of $k.$ By Corollary~\ref{divergence-test}, it follows that $\sum a_n$ diverges.
+
+(iii) Both the series $\sum 1/n$ and $\sum 1/n^2$ satisfy $\displaystyle\limsup_{n\to\infty}\abs{a_n}^{1/n}=1.$ 
+   However, $\sum 1/n$ diverges and $\sum 1/n^2$  converges.
+\end{proof}
+\begin{xca}
+    Determine the convergence of $\sum a_n,$
+    where \[a_n=\begin{cases}
+                \frac{1}{2^n} &\mbox{if $n$ is odd}\\
+                \frac{1}{3^n} &\mbox{if $n$ is even}.
+    \end{cases}
+    \]
+    \end{xca}
+
+
+\section*{Exercises}
+\setcounter{Exercise}{0}
+\begin{ExerciseList}
+\Exercise[]\label{exe-7-1-1} Determine whether $\sum_{n=1}^\infty \frac{1}{\sqrt{n}+\sqrt{n+1}}$ converges.
+	
+\Exercise[] \label{exe-7-1-2} Prove Theorem~\ref{linearity-series}.
+\end{ExerciseList}
+
+\section{Power Series}\label{power-series-1}
+\begin{leftbar}
+	\begin{definition}[Power Series]\label{power-series-defn} Given a sequence  $\{a_n\}_{n=0}^\infty$ of real numbers, the series 
+		\[\sum_{n=0}^{\infty}a_n x^n\]  is called a \textbf{\textit{power series}} \index{power series}  in $x$. The number $a_n$ is the $n$th \textbf{\textit{coefficient}} of the power series.
+	\end{definition}
+\end{leftbar}
+
+\begin{example}
+	The geometric series $\sum_{n=0}^\infty x^n$  is a power series and it converges iff $\abs{x} <1.$
+\end{example}
+We want to determine  $x\in\mathbb R$ for which the power series in Definition~\ref{power-series-defn} would converge.  It is obvious that the power series converges for $x=0.$ It turns out that the power series may converge for all $x\in\mathbb R$ or for all $x$ in some finite interval centered at $0.$ The next theorem makes these properties more precise. 
+
+\begin{thmbar}
+	\begin{theorem}\label{power-series-convergence-test} For a power series $\sum_{n=0}^{\infty}a_n x^n$, define  $\alpha$ and $R$ by \[\alpha = \limsup_{n\to\infty} \abs{a_n}^{1/n}\] and 
+		\[R=\begin{cases}
+			1/\alpha &\mbox{ if } \alpha\in (0, \infty)\\
+			0&\mbox{ if } \alpha=\infty\\
+			\infty&\mbox{ if }\alpha =0,
+		\end{cases}\]
+		respectively.  Then the power series converges absolutely for $\abs{x}< R$ and diverges for $\abs{x}>R.$ 
+	\end{theorem}
+\end{thmbar}
+
+
+\begin{proof} For all $x\in\mathbb R,$ we have
+	\[\limsup_{n\to\infty}\abs{a_n x^n}^{1/n}=\abs{x}\;\limsup_{n\to\infty}\abs{a_n}^{1/n} =\abs{x}\alpha.\] We now apply Theorem~\ref{root-test} (Root Test).
+If $0<\alpha< \infty,$ then the power series $\sum_{n=0}^{\infty}a_n x^n$ converges absolutely for $\abs{x} \alpha<1$   and  diverges for $\abs{x} \alpha>1,$   that is, the power series converges absolutely for  $\abs{x} <1/\alpha =R$  and  diverges for $\abs{x} >1/\alpha$.  If $\alpha = 0$ ($R=\infty$),  then   $\abs{x} \alpha =0<1$, and therefore the power series converges absolutely for  $\abs{x}<R=\infty.$  Finally, if $\alpha = \infty$ ($R=0$), then  $\abs{x} \alpha >1$ for all $x\ne 0,$ so that the power series diverges for $\abs{x}>R=0.$ The power series converges for $x=0$ because all the terms  except the first are zero.
+\end{proof}
+
+\begin{remark}
+	We see from Theorem~\ref{power-series-convergence-test}  that a power series converges for all $x\in (-R, R),$ but it says nothing about the convergence or divergence of a power series at  $x=\pm R$ when $0<R<\infty$. A power series may converge at one or both endpoints of the interval $(-R, R)$ and this property depends on the coefficients $a_n.$ The interval  on which a power series converges is called the \textbf{\textit{interval of convergence}}, \index{interval of convergence} and the number $R$ obtained in the theorem is called the \textbf{\textit{radius of  convergence}}. \index{radius of  convergence}
+\end{remark}
+
+\begin{xca}
+	Let $\{a_n\}$ be a sequence of positive numbers. Prove that 
+	\[\liminf_{n\to\infty}\dfrac{a_{n+1}}{a_n}\le\liminf_{n\to\infty}(a_n)^{1/n} \le\limsup_{n\to\infty}(a_n)^{1/n}  \le \limsup_{n\to\infty}\dfrac{a_{n+1}}{a_n}.\]
+\end{xca}
+
+\begin{xca}[Ratio Test] The radius of convergence $R$ of a power series $\sum_{n=0}^{\infty}a_n x^n$ equals 
+	$\lim\limits_{n\to\infty}\abs{\dfrac{a_n}{a_{n+1}}},$
+	whenever the limit exists as a finite number or $\infty$.
+\end{xca}
+
+Let $\{a_n\}_{n=0}^\infty$ be a sequence  of real numbers. Then the power series $\sum_{n=0}^{\infty} a_n x^n$ has its radius of convergence $R\in [0,  \infty].$ Suppose that $R\in (0, \infty).$   For each $n\in\mathbb N\cup\{0\},$ define $f_n :(-R, R)\to\mathbb R$ by 
+\[ f_n(x) := \sum_{k=0}^{n}a_k x^k, \quad x\in (-R, R).\] Then
+\[\lim\limits_{n\to\infty} f_n(x) = \sum_{n=0}^{\infty} a_n x^n \quad \mbox{ for all }x\in (-R, R).\] Define $f:(-R, R)\to\mathbb R$ by
+\[f(x):= \lim\limits_{n\to\infty} f_n(x), \quad x\in (-R, R).\]
+We observe  that each $f_n$ is a polynomial function, and therefore it is differentiable  (in particular, continuous) on $(-R, R)$ and Riemann integrable on every subinterval $[a, b]\subset(-R, R).$  We are then interested in determining  whether the function $f$ inherits continuity, differentiability and integrability properties from $f_n.$ More specifically, our aim in this chapter is  to address the following questions.
+\begin{itemize}
+	\item Is $f$ continuous on $(-R, R),$  and differentiable on $(-R, R)$, and integrable on every subinterval $[a, b]\subset (-R, R)?$
+ \item Even if $f$ is continuous at $x_0\in (-R, R)$, is it true that 
+	\[\lim\limits_{x\to x_0}\lim\limits_{n\to\infty} f_n(x)  = \lim\limits_{n\to\infty}\lim\limits_{x\to x_0} f_n(x)?\]
+	\item Even if $f$ is differentiable at $x_0\in (-R, R),$ is it true that 
+	\[f'(x_0) = \lim\limits_{n\to\infty}f_n'(x_0)= \sum_{n=1}^{\infty} na_n x_0^{n-1}? \]
+	\item Even if $f$ is integrable on interval $[a, b]\subset (-R, R),$ is it true that 
+	\[\int_a^b f(x)\, dx = \lim\limits_{n\to\infty}\int_a^b f_n(x)\, dx= \sum_{n=0}^{\infty}  \frac{a_n}{n+1} (b^{n+1}-a^{n+1})? \]
+\end{itemize}
+We shall show in this chapter that each of the questions above has an affirmative answer and examine the questions in a broad setting in which the polynomials $f_n$ may be replaced with more general functions. 
+
+
+\section{Pointwise and Uniform Convergence}\label{pointwise-uniform}
+
+\begin{leftbar}
+	\begin{definition}[Pointwise Convergence]\label{pointwise-convergence} \index{pointwise convergence}
+		Let $\{f_n\}$ be a sequence of real-valued functions  defined on $J\subseteq \mathbb R.$
+	 We say that $\{f_n\}$  \textbf{\textit{converges pointwise }} on $J$ if  $\{f_n(x)\}$ converges for each $x\in J$.  Whenever $\{f_n\}$ converges pointwise on $J$, we call the function $f:J\to\mathbb R$ defined by
+		\[f(x):=\lim\limits_{n\to\infty}f_n(x), \quad x\in J,\] the \textbf{\textit{pointwise limit}} of $f_n$ on $J$  and write  $f_n\to f$ pointwise on $J$,   or simply $f_n\to f$ pointwise   when there is no confusion of $J.$   
+	\end{definition}
+\end{leftbar}
+
+\begin{remark}\label{chap7-remark-1}
+	The  definition of $f_n\to f$ pointwise on $J$ in terms of quantifiers reads as follows: 	
+	$f_n\to f$ pointwise on $J$ iff
+	\[\forall x\in J \mbox{ and }  \forall\varepsilon>0\; \exists N\in\mathbb N \mbox{ such that } \forall n\in\mathbb N,  n\ge N \implies\abs{f_n(x) - f(x)}< \varepsilon.\]
+	It is now clear that the choice of $N$ may depend not only on  $\varepsilon>0$ but also on  $x\in J.$ This dependence of $N$ on $x$ and $\varepsilon$ is usually denoted by $N(x, \varepsilon);$ however, the reader is warned that $N$ should \textit{not} be interpreted as a function of $x$ and $\varepsilon.$ 
+\end{remark}
+
+\begin{example}
+	For each $n\in\mathbb N,$ consider $f(x) = 1/(1-x)$ and $f_n(x) = \sum_{k=0}^{n} x^k$ for  $x\in (-1, 1).$ Since $x^n\to 0$ as $n\to\infty$ for all $x\in (-1, 1)$, we can verify that
+	$f_n \to f$ pointwise on  $(-1,1).$  Moreover,  $f$ and $f_n$ are continuous on $(-1, 1)$ for all $n$ and
+ \[\lim\limits_{x\to x_0}\lim\limits_{n\to\infty} f_n(x)= f(x_0)=\lim\limits_{n\to\infty}\lim\limits_{x\to x_0} f_n(x)\] for all $x_0\in (-1, 1).$
+\end{example}
+
+
+\begin{example}\label{chap7-ex8}
+	For each $n\in\mathbb N,$ consider  $f_n(x) = x^n$ for  $x\in [0, 1].$ Define $f$ by
+	\[f(x) = \begin{cases}
+		0 &\mbox{if } x\in (0, 1]\\
+		1 &\mbox{if } x=1.
+	\end{cases}\]
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.7\linewidth]{chap07/figures/7-1}
+		\caption{Graphs of $f$, $f_2$, $f_4$ and $f_{16}$}
+		\label{fig:7-1}
+	\end{figure}
+	Then $f_n \to f$ pointwise on  $[0, 1].$ As shown in Figure~\ref{fig:7-1}, we can easily verify that each $f_n$ is  continuous on $[0, 1]$, but $f$ is not continuous at $x=1.$ This example shows that the pointwise limit of a sequence of a continuous functions may not be continuous.  Moreover, \[0=\lim\limits_{x\to 1^{-}}\lim\limits_{n\to\infty} f_n(x)\ne \lim\limits_{n\to\infty}\lim\limits_{x\to 1^{-}} f_n(x)=1.\]
+	 Thus, the two limits shown above may not be interchanged in general.
+\end{example}
+
+\begin{example}\label{chap7-ex9}
+For each $n\in\mathbb N,$ consider the function $g_n$ given by
+\[g_n(x)= \begin{cases}
+	0 &\mbox{ if } x=0\\
+	n  &\mbox{ if } 0<x\le\frac1n\\
+	0 &\mbox{ if } \frac1n<x\le 1.
+\end{cases}\]
+\end{example}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\linewidth]{chap07/figures/7-2}
+	\caption{Graph of $g_n$}
+	\label{fig:7-2}
+\end{figure}
+Define $g:[0, 1]\to\mathbb R$ by $g(x) = 0$ for all $x\in [0, 1].$ It is clear that  $g_n$ is discontinuous on $[0, 1]$ and $g$ is continuous on $[0, 1].$ To show $g_n\to g$ pointwise on $[0, 1],$ fix $x\in (0, 1]$. Then there exists $N\in\mathbb N$ such that $1/N<x,$ so that $g_N(x) =0.$ Since $ g_n(x)=0$ if $1/n<x\le 1$, we have $g_n(x) = 0$ for all $n\ge N,$  that is, $g_n(x) \to 0.$ 
+This example shows the  existence of a sequence of discontinuous functions that converges pointwise to a continuous function. In addition, $g$ and $g_n$ are integrable, and \[1=\lim\limits_{n\to\infty}\int_0^1 g_n(x)\, dx \ne  \int_0^1 g(x)\, dx=0.\] 
+Thus, the limit operation and integration (which is also a limit) may not be interchanged in general.
+ 
+ The next example shows that the pointwise limit function of a sequence of integrable functions (even if they are continuous) may not be integrable.
+\begin{example}\label{chap7-ex10}
+	For each $n\in\mathbb N,$ consider the function  $h_n$ given by
+	\[h_n(x)= \begin{cases}\displaystyle
+			n^2 x  &\mbox{ if } 0\le x<\frac1n\\
+		1/x &\mbox{ if } \frac1n\le x\le 1.\\
+		\end{cases}\]
+\end{example}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.65\linewidth]{chap07/figures/7-3}
+	\caption{Graphs of $h_n$ and $h_{n+1}$}
+	\label{fig:7-3}
+\end{figure}
+Define $g$ on $[0, 1]$ by
+\[g(x)= \begin{cases}
+		0  &\mbox{ if } x=0\\
+	1/x&\mbox{ if } 0<x\le 1.\\
+\end{cases}\]
+We can verify that $g_n\to g$ pointwise on $[0, 1].$
+We also see that each $g_n$  is continuous on $[0, 1]$, but $g$ is not. In fact, $g$ is not even Riemann integrable on $[0, 1].$ This example shows that the pointwise limit of a sequence of Riemann integrable function may not be Riemann integrable in general.
+
+
+\begin{example}\label{chap7-ex11}
+	For each $n\in\mathbb N,$ define $f_n$  on $[-1, 1]$ by
+	\[f_n(x) = \frac{x}{1+nx^2}, \quad x\in [-1, 1].\] 
+ \begin{figure}[h]
+ 	\centering
+ 	\includegraphics[width=0.7\linewidth]{chap07/figures/7-6}
+ \caption{Graphs of $f_2$, $f_6$ and $f_{12}$}
+ 	\label{fig:7-6}
+  \end{figure}
+ It is clear that $\lim\limits_{n\to\infty}f_n(0) = 0.$  For $x\ne 0,$ we note that $\lim\limits_{n\to\infty} (1+nx^2) = \infty.$ Therefore
+ 	$f_n\to f$ pointwise on $x\in [-1, 1],$ where $f$ is defined by $f(x) = 0$ for all $x\in [-1,1].$
+ Moreover, each $f_n$ is differentiable on $[-1, 1]$, and 
+	\[f_n'(x) = \frac{1-nx^2}{(1+nx^2)^2}.\]
+%	The critical points of $f_n$ in $(-1, 1)$ for  $n\ge 2$ are given by $x= \pm1/\sqrt{n}$   and 
+%	\[f_n(\pm1/\sqrt{n}) = \pm1/(2\sqrt{n}) \mbox{ for } n\ge 2.\] 
+ %For all $n\ge 1,$ \[f_n(\pm 1) = \pm 1/(1+n). \]
+ Since $f_n'(0) =1 $  for all $n$ and $f'(0) =0,$  we find
+	\[1=\lim\limits_{n\to\infty}f_n'(0)\ne f'(0)=0. \] Thus,   $\{f'_n\}$ does not converge to $f'$ pointwise on $[-1, 1].$ In fact, 
+	$f'_n\to g$ pointwise on $[-1, 1]$ where $g$ is given by
+	\[g(x) = \begin{cases}
+		1 &\mbox{ if } x=0\\
+		0 &\mbox{ if } x\ne 0.
+	\end{cases}\]
+	Here, for the case $x\ne 0,$ we used
+	\[\abs{f'_n(x)} \le\frac{1+nx^2}{(1+nx^2)^2} =\frac{1}{1+nx^2}\]  and found that $f'_n(x) \to 0$ as $n\to\infty.$
+\end{example}
+
+
+Based on the preceding examples, we recognize that there is a fundamental problem with using pointwise convergence to produce useful results.   As mentioned in Remark~\ref{chap7-remark-1} on pointwise convergence, the choice of $N$ often depends on both $\varepsilon>0$ and $x\in J.$ To study a more restricted but useful notion of convergence than pointwise convergence, we give a definition below in which the choice of $N$ is  independent of $x\in J$.
+\begin{leftbar}
+	\begin{definition}[Uniform Convergence]\label{uniform-convergence-def}\index{uniform convergence}
+	Let $\{f_n\}$ be a sequence of real-valued functions  defined on $J\subseteq \mathbb R.$ We say that $\{f_n\}$  \textbf{\textit{converges uniformly }}  on $J$ to a function $f:J\to\mathbb R$  if   
+			\[ \forall\varepsilon>0\; \exists N\in\mathbb N \mbox{ s.t. } \forall n\in\mathbb N,\;  n\ge N \implies\abs{f_n(x) - f(x)}< \varepsilon\quad  \forall x\in J. \]
+		 Whenever $\{f_n\}$ converges  uniformly on $J$ to $f$,  we write   $f_n\to f$ uniformly on $J$. 
+	\end{definition}
+	\end{leftbar}
+	
+	
+When $f_n\to f$ uniformly on  $J\subset\mathbb R$, given $\varepsilon>0$, we can find $N\in\mathbb N$ such that 
+\[f(x)-\varepsilon< f_n(x) < f(x) + \varepsilon\] for all $x\in J$ and $n\ge N.$ This means that  the graph of $f_n$ with $n\ge N$ must lie  in the band between the graphs of $f-\varepsilon$ and $f+\varepsilon$ as shown in Figure~\ref{fig:7-4}. 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.45\linewidth]{chap07/figures/7-4}
+	\caption{}
+	\label{fig:7-4}
+\end{figure}
+
+\begin{example}
+		Let  $n\in\mathbb N$ and  $f_n: \mathbb R\to\mathbb R$ be defined by 
+		\[f_n(x) = \dfrac{\sin{nx}}{n},\quad  x\in\mathbb R.\]
+	For all $n\in\mathbb N$ and $x\in\mathbb R,$ we have 
+		\[\abs{f_n(x)} \le \abs{\dfrac{\sin{nx}}{n}}\le \dfrac{1}{n}.\] It then follows that $f_n\to 0$ pointwise on $\mathbb R.$ This convergence is, in fact, uniform on $\mathbb R.$ To show this, let $\epsilon>0$ be given and choose $N\in\mathbb N$ such that $\dfrac{1}{N} <\varepsilon.$ Then, for all $n\ge N,$ we have
+			\[\abs{f_n(x)} \le \dfrac{1}{n}\le \dfrac{1}{N}<\varepsilon\]
+   for all $x\in\mathbb R.$
+\end{example}
+	\begin{xca}
+	Prove that uniform convergence implies pointwise convergence.
+\end{xca}	
+
+
+The following theorem provides an alternative method to prove  uniform convergence.  
+\begin{thmbar}
+\begin{theorem}\label{chap7-thm14}
+	Let $J\subseteq \mathbb R$, $ f: J\to\mathbb R$,  $n\in\mathbb N$, and  $ f_n: J\to\mathbb R$. Define $D_n$ by
+  \[D_n:= \sup_{x\in J}\abs{f_n(x) - f(x)}.\] Then $f_n\to  f$   uniformly  on $J$  iff 
+$\lim\limits_{n\to\infty} D_n =0.$
+\end{theorem}
+\end{thmbar}
+\begin{proof} A  proof follows directly by using  the  definition of the limit of a sequence of real numbers and
+	is left as an exercise.
+\end{proof}
+
+
+\begin{example}\label{chap7-ex15}
+	For each $n\in\mathbb N,$ consider  $f_n(x) = x^n$ for  $x\in [0, 1].$ Define $f$ by
+\[f(x) = \begin{cases}
+	0 &\mbox{if } x\in [0, 1)\\
+	1 &\mbox{if } x=1.
+\end{cases}\]
+It was seen in Example~\ref{chap7-ex8} that  $f_n \to f$ pointwise on  $[0, 1].$  We now examine whether this convergence is uniform on $[0, 1].$  We compute 
+\[D_n= \sup_{x\in [0, 1]} \abs{f_n(x) - f(x)}=1.\] 
+By Theorem~\ref{chap7-thm14}, we see that $\{f_n\}$ does not converge uniformly on $[0, 1]$ to $f$. 
+\end{example}
+
+\begin{xca}
+For  $f_n$ and $f$ in Example~\ref{chap7-ex15},  show, by using  Definition~\ref{uniform-convergence-def}, that  $\{f_n\}$ does not converge  uniformly on $[0, 1].$
+\end{xca}
+
+\begin{example}\label{chap7-ex16}
+In Example~\ref{chap7-ex11}, we show that $f_n\to 0$ pointwise on $[-1, 1],$ where $f_n$ are given by
+		\[f_n(x) = \frac{x}{1+nx^2}, \quad x\in [-1, 1].\] 
+The convergence is actually uniform.  To show this,  we compute
+\[f_n'(x) = \frac{1-nx^2}{(1+nx^2)^2}\]
+	and find critical points of $f_n$ in $(-1, 1)$ for  $n\ge 2$ as $x= \pm1/\sqrt{n}.$   Then
+	\[f_n(\pm1/\sqrt{n}) = \pm1/(2\sqrt{n}) \mbox{ for } n\ge 2.\] 
+For all $n\ge 1,$ \[f_n(\pm 1) = \pm 1/(1+n).\] This implies that 
+\[D_n = \sup_{x\in [-1, 1]} \abs{f_n(x)} \le \frac{1}{2\sqrt{n}}.\] By Theorem~\ref{chap7-thm14}, we conclude that 
+$f_n\to 0$ uniformly on $[-1, 1].$
+\end{example}
+
+As one might expect, there is a Cauchy criterion for uniform convergence which is the content of the next theorem.
+
+\begin{thmbar}
+	\begin{theorem}[Cauchy Criterion] \label{uniform-covergence-Cauchy-criterion} 	Let $J\subseteq \mathbb R$,  $n\in\mathbb N$, and  $ f_n: J\to\mathbb R$. Then there exists a function $f:J\to\mathbb R$ such that
+	$f_n\to f$  uniformly on $J$ if and only if the following Cauchy criterion holds:
+for all $\varepsilon>0$ there exists $N\in\mathbb N$ such that  for all  $m,n\in\mathbb N$,  \[m,n\ge N \implies\abs{f_n(x) - f_m(x)}< \varepsilon\quad   \mbox{ for all } x\in J. \]
+\end{theorem}
+\end{thmbar}
+
+\begin{proof}
+	We provide a proof of the ``if\,'' direction and leave the ``only if\,'' direction as an exercise.
+Suppose that the Cauchy criterion in the statement of the theorem holds. Then, for each $x\in J,$ the sequence $\{f_n(x)\}$ is Cauchy, and it must coverage to a real number. Define $f:J\to\mathbb R$ by
+\[f(x):= \lim\limits_{n\to\infty}f_n(x), \quad x\in J.\] Thus, $f_n \to f$  pointwise on $J.$ It remains to show that this convergence is uniform.
+Let $\varepsilon>0$ be given. Since the Cauchy criterion holds, there exists $N\in\mathbb N$ such that  for all  $m,n\in\mathbb N$,  \[m,n\ge N \implies\abs{f_n(x) - f_m(x)}< \frac{\varepsilon}{2}\quad   \mbox{ for all } x\in J.\]
+Fixing $n\ge N$ and letting $m\to\infty$ yields
+\[\abs{f_n(x) - f(x)}\le \frac{\varepsilon}{2} <\varepsilon\quad   \mbox{ for all } x\in J.\]
+Thus,  for all $n\in\mathbb N,$ we have
+\[n\ge N\implies \abs{f_n(x) - f(x)} <\varepsilon\quad   \mbox{ for all } x\in J.\]
+Hence $f_n\to f$ uniformly on $J.$
+
+
+\end{proof}
+
+ \begin{xca}
+ 	Prove the ``only if\,'' direction in Theorem~\ref{uniform-covergence-Cauchy-criterion}. 
+ \end{xca}
+ 
+
+Let $\{f_n\}_{n=0}^\infty$ be a sequence of real-valued functions  $f_n$ defined on $J\subseteq\mathbb R.$ For each $n\in\mathbb N\cup\{0\},$ define $s_n:J\to\mathbb R$  by
+\[s_n(x) := \sum_{k=0}^{n} f_k(x), \quad x\in J.\]
+We say that the series $\sum_{n=0}^{\infty} f_n$ converges pointwise (respectively, uniformly) on $J$ iff  the sequence $\{s_n\}$ converges pointwise (respectively, uniformly) on $J$.  The function $s_n$ is called a \textbf{\textit{partial sum}} \index{$n$th partial sum} of the series $\sum_{n=0}^{\infty} f_n$.  Whenever there is a function $f:J\to\mathbb R$ such that $s_n\to f$ pointwise on $J$, we write $\sum_{n=0}^{\infty} f_n=f$   to mean $ \sum_{n=0}^{\infty} f_n(x)=f(x)$ for all $x\in J$ and call $f$ the sum of the series. The  symbol $\sum_{n=0}^\infty f_n$ is commonly used for both the series and its sum function whichever is right for the context of its use.
+
+
+\begin{thmbar}
+	\begin{theorem}[Weierstrass $M$-test]\label{Weierstrass-M-test}
+	Let $J\subseteq \mathbb R$,  $n\in\mathbb N\cup\{0\}$, and  $ f_n: J\to\mathbb R$. Suppose that $\{M_n\}_{n=0}^\infty$ is a sequence of nonnegative numbers that satisfy
+\[\abs{f_n(x)}\le M_n \quad \mbox{ for all }x\in J \mbox{ and }n\in\mathbb N \cup\{0\}.\]
+If $\sum_{n=0}^{\infty}M_n<\infty,$ then $\sum_{n=0}^{\infty} f_n$ converges uniformly on $J.$
+\end{theorem}
+\end{thmbar}
+\begin{proof} For all $n\in\mathbb N\cup\{0\}$, define
+\[t_n = \sum_{k=0}^{n} M_k \quad \mbox{and} \quad  s_n(x) = \sum_{k=0}^{n} f_k(x), \quad x\in J.\]
+ Suppose $\sum_{n=0}^{\infty}M_n$ converges. Let $\varepsilon>0$ be given. Then there exists $N\in\mathbb N$ such that
+ for all $n, m\in\mathbb N,$
+ \[m,n\ge N\implies\abs{t_n - t_m} <\varepsilon.\]
+ Fix $n, m\in\mathbb N$ such that 
+ $n> m\ge N.$ Then 
+ \[\abs{s_n(x) - s_m(x)}  = \abs{\sum_{k={m+1}}^{n} f_k(x)} \le \sum_{k={m+1}}^{n} M_k = \abs{t_n - t_m} <\varepsilon \]
+ for all $x\in J.$ The case $m>n\ge N$ is similarly treated, and the case $m=n\ge N$ is trivial. We have shown that $\{s_n\}$ satisfies the Cauchy criterion for uniform convergence, and therefore, by Theorem~\ref{uniform-covergence-Cauchy-criterion},   $\{s_n\}$ converges uniformly on $J.$
+\end{proof}
+
+\begin{remark}
+It can be easily seen that the  condition $\abs{f_n(x)}\le M_n$ in the Weierstrass $M$-test only needs to hold for sufficiently large $n.$ (Why?)
+\end{remark}
+
+
+\begin{example}$\empty$
+	\begin{enumerate}[label=(\alph*)]
+		\item $ \sum_{n=0}^{\infty} \frac{x^{n+1}}{(n+1)^2}$ converges uniformly on $[-1, 1]$ because 
+		\[\abs{\frac{x^{n+1}}{(n+1)^2}}\le\frac{1 }{(n+1)^2}\quad \mbox{ for all } x\in [-1,1] \mbox{ and } n\in\mathbb N\cup\{0\}\] and 
+		$\sum_{n=0}^{\infty}\frac{1 }{(n+1)^2}$ converges.
+		
+		\item $ \sum_{n=0}^{\infty} \frac{\cos(nx)}{(n+1)^{3/2}}$ converges uniformly on $\mathbb R$ because
+			\[\abs{\frac{\cos(nx)}{(n+1)^{3/2}}}\le\frac{1 }{(n+1)^{3/2}}\quad \mbox{ for all } x\in [-1,1] \mbox{ and } n\in\mathbb N\cup\{0\}\] and 
+		$\sum_{n=0}^{\infty}\frac{1 }{(n+1)^{3/2}}$ converges.
+		\item The radius of convergence $R$ of the power series $\displaystyle \sum_{n=0}^{\infty} \frac{x^{n+1}}{n+1}$  is given by
+		\[\frac{1}{R} = \limsup_{n\to\infty}\left(\frac{1}{n+1}\right)^{1/n}= 1. \] Since the alternating series $\sum_{n=0}^{\infty} (-1)^{n+1}\frac{1}{n+1}$ converges and the harmonic series $\displaystyle \sum_{n=0}^{\infty} \frac{1}{n+1}$ diverges,  the interval of convergence of the power series is $[-1, 1).$ Moreover,  since
+		\[\abs{\frac{x^{n+1}}{n+1}}\le \frac{1}{n+1}\quad \mbox{ for all } x\in [-1, 1) \mbox{ and } n\in\mathbb N\cup\{0\},\] it would be tempting to take $M_n = \frac{1}{n+1}$ to use the Weierstrass $M$-test, but  $ \sum_{n=0}^{\infty} \frac{1}{n+1}$ diverges, and no conclusion may be made  about the uniform convergence of the power series. However, if we take any interval of the form $[-a, a]$ with $a\in (0, 1),$ then 
+		\[\abs{\frac{x^{n+1}}{n+1}}\le \frac{a^{n+1}}{n+1}\quad \mbox{ for all } x\in [-a, a] \mbox{ and } n\in\mathbb N\cup\{0\}.\] 
+		Applying the  ratio  test, we find that   $ \sum_{n=0}^\infty  \frac{a^{n+1}}{n+1}$ converges, and therefore, by the Weierstrass $M$-test, the power series converges uniformly on $[-a, a].$
+		
+	\end{enumerate}
+\end{example}
+
+\section*{Worked out problems for Section~\thesection}
+\begin{problem}\label{chap7-wp-1}
+For each $n\in\mathbb N,$ let  $f_n:[0, 1]\to\mathbb R$ be defined  by
+\[f_n(x) = n^2x^n(1-x), \quad x\in [0, 1].\]  
+\begin{enumerate}[label=(\roman*)]
+	\item\label{chap7-wp-1a} Show that  $f_n\to 0$ pointwise on $[0, 1].$ 
+	\item Show that the convergence in (\ref{chap7-wp-1a}) is not uniform.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+		\textcolor{red}{content..} %see Kenneth Ross p. 137
+\end{solution}
+
+\begin{problem}
+	For each $n\in\mathbb N,$ let  $f_n:[0, 1)\to\mathbb R$ be defined  by
+	\[f_n(x) = nx^n, \quad x\in [0, 1).\]
+
+	\begin{enumerate}[label=(\roman*)]
+		\item\label{chap7-wp-2a} 	Show that  $f_n\to 0$ pointwise on $[0, 1).$ 
+		\item 	Show that the convergence in (\ref{chap7-wp-2a}) is not uniform on $[0, 1).$ 
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+		\textcolor{red}{content..} %Ross p. 137
+\end{solution}
+\section*{Exercises}
+\setcounter{Exercise}{0}
+\begin{ExerciseList}
+	\Exercise[]\label{exe-7-2-1}For each $n\in\mathbb N,$ let  $f_n:\mathbb R\to\mathbb R$ be defined  by
+	\[f_n(x) = \frac{nx}{1+n^2x^2}, \quad x\in \mathbb R.\]  
+	\begin{enumerate}[label=(\roman*)]
+		\item\label{exe-7-2-1a} Show that $f_n\to 0$ pointwise on $\mathbb R.$ 
+		\item Determine whether the convergence in (\ref{exe-7-2-1a}) is  uniform on $\mathbb R.$ 
+	\end{enumerate}
+	
+	
+	
+	\Exercise[] Insert exercise
+\end{ExerciseList}
+
+\section{Consequences of Uniform Convergence}\label{uniform-convergence}
+The following theorem concerns the interchange of two limits.
+
+\begin{thmbar}
+	\begin{theorem}\label{chap7-thm17} Let $J\subseteq \mathbb R$,  $ f: J\to\mathbb R$,   $n\in\mathbb N$, and   $ f_n: J\to\mathbb R.$ 
+%	Let $\{f_n\}$ be a sequence of real-valued functions  defined on $J\subset \mathbb R.$     
+	Let $x_0$ be a limit point of $J$ and suppose that \[\lim\limits_{x\to x_0} f_n(x)\] exists for each    $n\in\mathbb N.$
+If  $f_n\to f$ uniformly on $J,$ then 
+\[ \lim\limits_{n\to\infty}\lim\limits_{x\to x_0} f_n(x)\]  exists and 
+\begin{equation}\label{7.3.1}
+	\lim\limits_{n\to\infty}\lim\limits_{x\to x_0} f_n(x)=\lim\limits_{x\to x_0} \lim\limits_{n\to\infty}f_n(x).
+\end{equation}
+\end{theorem}
+\end{thmbar}
+	
+\begin{proof} 
+Put \[\ell_n= \lim\limits_{x\to x_0} f_n(x),  n\in\mathbb N.\]
+  We first show that $\{\ell_n\}$  converges to a real number. To do this, let $\eta >0$ be given.  By the Cauchy criterion for uniform convergence (see Theorem~\ref{uniform-covergence-Cauchy-criterion}), there exists $N_0\in\mathbb N$ such that  for all  $m,n\in\mathbb N$,  \[m,n\ge N_0 \implies\abs{f_n(x) - f_m(x)}< \frac{\eta}{2}\quad   \mbox{ for all } x\in J. \]
+For all $m,n\in\mathbb N_0$, it follows that
+\[m,n\ge N_0\implies \abs{\ell_n -\ell_m}= \lim\limits_{x\to x_0}\abs{f_n(x) - f_m(x)}\le  \frac{\eta}{2} < \eta.\]    This shows that $\{\ell_n\}$ is a Cauchy sequence, and it converges to a real number $\ell.$  Thus, 
+\begin{equation}\label{7.3.2}
+\lim\limits_{n\to\infty}\lim\limits_{x\to x_0} f_n(x)= \lim\limits_{n\to\infty}\ell_n =	\ell.
+\end{equation}
+
+We next show that 
+\begin{equation}\label{7.3.3}
+	\lim\limits_{x\to x_0} f(x)=\ell.
+\end{equation}
+ Let $\varepsilon>0$ be given. 
+Then there exists $N\in\mathbb N$ such that 
+\begin{equation} \label{7.3.4}\abs{f(x)-f_N(x)}< \frac{\varepsilon}{3}
+\end{equation} for all $x\in J$ (this follows from $f_n\to f$ uniformly on $J$) and 
+\begin{equation}\label{7.3.5}\abs{\ell_N - \ell}< \frac{\varepsilon}{3}.
+\end{equation}
+Since  $\ell_N$ is the limit of $f_N (x)$ at $x_0$,  there exists $\delta>0$ such that for all
+$ x\in (x_0-\delta, x_0+\delta)\cap J$, we have
+\begin{equation}\label{7.3.6}0< \abs{x- x_0}< \delta \implies \abs{f_N(x)-\ell_N} <\frac{\varepsilon}{3}.
+\end{equation}
+In view of (\ref{7.3.4}) to (\ref{7.3.6}), for all 
+$ x\in (x_0-\delta, x_0+\delta)\cap J$ such that $0< \abs{x- x_0}< \delta$, we have
+\[
+\abs{f(x) - \ell}\le \abs{f(x) - f_N(x)}+ \abs{f_N(x) - \ell_N} +\abs{\ell_N - \ell} < \frac{\varepsilon}{3} +\frac{\varepsilon}{3}+\frac{\varepsilon}{3}= \varepsilon.
+\]
+This proves (\ref{7.3.3}).   
+
+Finally, using (\ref{7.3.2}) and (\ref{7.3.3}) along with $f_n\to f$ pointwise on $J,$
+we conclude
+\[
+\lim\limits_{n\to\infty}\lim\limits_{x\to x_0} f_n(x)=\lim\limits_{x\to x_0} \lim\limits_{n\to\infty}f_n(x).\qedhere\]
+\end{proof}
+The following corollary shows that the uniform limit  of a sequence of continuous functions is  continuous.
+
+\begin{thmbar}
+	\begin{corollary}\label{chap7-cor-1}
+	Let $J\subseteq \mathbb R$,  $ f: J\to\mathbb R$,   $n\in\mathbb N$, and   $ f_n: J\to\mathbb R.$ 
+	%Let $\{f_n\}$ be a sequence of real-valued functions  defined on $J\subseteq \mathbb R$ and $f:J\to\mathbb R.$
+	  Suppose that each $f_n$ is continuous at a point $x_0\in J$. If $f_n\to f$ uniformly on $J,$ then $f$ is continuous at $x_0.$
+\end{corollary} 
+\end{thmbar} 
+\begin{proof} If $x_0$ is  not a limit point of $J,$ then $f$ is  continuous at $x_0.$ 
+	Suppose, then, that $x_0$ is a limit point of $J.$ Then, by Theorem~\ref{chap7-thm17}, we have
+	\[\lim\limits_{x\to x_0} \lim\limits_{n\to\infty}f_n(x)=\lim\limits_{n\to\infty}\lim\limits_{x\to x_0} f_n(x).\]
+	Since $\lim\limits_{n\to\infty}f_n(x) = f(x)$ for all $x\in J$ and each $f_n$ is continuous at $x_0$,  it follows that 
+		\[\lim\limits_{x\to x_0} f(x) = \lim\limits_{n\to\infty}f_n(x_0)= f(x_0).\qedhere\]
+		
+\end{proof}
+\begin{xca}
+Prove Corollary~\ref{chap7-cor-1} without  using Theorem~\ref{chap7-thm17}, but by using definitions of the uniform convergence and continuity.
+\end{xca}	
+
+\begin{example}\label{chap7-ex19}
+	For each $n\in\mathbb N,$ consider  $f_n(x) = x^n$ for  $x\in [0, 1].$ Define $f$ by
+	\[f(x) = \begin{cases}
+		0 &\mbox{if } x\in [0, 1)\\
+		1 &\mbox{if } x=1.
+	\end{cases}\]
+	It was seen in Example~\ref{chap7-ex15} that  $f_n \to f$ pointwise but not uniformly on $[0, 1].$  If the convergence was uniform on $[0, 1],$ then $f$ would have been continuous  on $[0, 1]$ by Corollary~\ref{chap7-cor-1}, but $f$ is not continuous at $x=1.$
+\end{example}
+
+\begin{xca} Show that the converse of Corollary~\ref{chap7-cor-1} is not true by finding
+ a sequence of continuous functions that converges to a continuous function, but  the convergence is not uniform. 
+\end{xca}	
+
+
+\subsection*{Continuity of the Sum}
+\begin{thmbar}
+	\begin{theorem}\label{chap7-thm-24}
+Let $\sum_{n=0}^{\infty} f_n$ be a series of real-valued functions on $J\subseteq\mathbb R$. 
+Suppose that each  $f_n$ is continuous at a point $x_0\in J.$ If the series converges  uniformly on $J$ to a function $f$, then $f= \sum_{n=0}^{\infty}f_n$ is also continuous at $x_0.$
+\end{theorem}
+\end{thmbar}
+
+\begin{proof}
+	A proof follows  from Corollary~\ref{chap7-cor-1} when  $f_n$ there is replaced with $s_n$. 
+\end{proof}
+
+
+\subsection*{Termwise Integration}
+In Example~\ref{chap7-ex9}, we looked at a sequence of functions $g_n$ that converges to a function $g$ pointwise on $[0, 1],$ but the sequence of Riemann integrals of $g_n$ does not converge to the Riemann integral of $g$ on $[0, 1].$ The following theorem shows that uniform convergence is  a sufficient condition under which  integration and limit operation can be interchanged.  We begin by assuming that functions are continuous, but this assumption may be dropped as seen in a worked out problem at the end of this section.
+
+\begin{thmbar}
+	\begin{theorem}\label{chap7-thm25}
+	Let $\{f_n\}$ be a sequence of real-valued  functions  that are continuous on an interval $[a, b]$ with  $a<b.$  If $\{f_n\}$ converges  uniformly on $[a, b]$ to a function $f,$ then
+		\[\lim\limits_{n\to\infty} \int_a^b f_n(x)\, dx=\int_a^b f(x)\, dx.\]
+\end{theorem}
+\end{thmbar}
+
+\begin{proof} Suppose that $\{f_n\}$ converges  uniformly on $[a, b]$ to a function $f.$  	Since each $f_n$ is continuous on $[a, b],$ Corollary~\ref{chap7-cor-1}  implies that $f$ is continuous on $[a, b],$  so the functions $f, f_n$, and $f_n-f$ are  all integrable on $[a, b].$
+	
+	 Let $\varepsilon>0$ be given.  Since $f_n\to f$ uniformly on $[a, b],$ there exists $N\in\mathbb N$ such that for all $n\in \mathbb N$ 
+	\[n\ge N \implies \abs{f_n(x) - f(x)}< \frac{\varepsilon}{2(b-a)}\quad \mbox{ for all }x\in [a, b].\]
+	This implies that for all $n\in\mathbb N$
+	\[n\ge N \implies \int_a^b \abs{f_n(x)- f(x)}\, dx <\int_a^b \frac{\varepsilon}{2(b-a)}\, dx = \frac{\varepsilon}{2}. \]
+Since \[\abs{\int_a^b f_n(x)\, dx- \int_a^bf(x)\, dx} \le \int_a^b \abs{f_n(x)- f(x)}\, dx,\]  it follows that for all $n\in\mathbb N$
+	\[n\ge N \implies \abs{\int_a^b f_n(x)\, dx- \int_a^b f(x)\, dx}<\varepsilon.\]
+Hence
+		\[\lim\limits_{n\to\infty} \int_a^b f_n(x)\, dx\] exists, and  	
+		\[\lim\limits_{n\to\infty} \int_a^b f_n(x)\, dx=\int_a^b f(x)\, dx.\qedhere\]
+\end{proof}
+
+\begin{thmbar}
+	\begin{corollary}[Termwise Integration]\label{chap7-cor-7-3-1}
+Let $\sum_{n=0}^{\infty}f_n$ be a series of real-valued continuous functions $f_n$ defined on an interval $[a, b]$.  Suppose that the series $\sum_{n=0}^{\infty}f_n$ converges   uniformly on $[a, b]$ to a function $f$. Then
+\[\int_a^b f(x)\, dx = \sum_{n=0}^{\infty}\int_a^b f_n(x)\, dx.\]
+\end{corollary}
+\end{thmbar}
+\begin{proof}
+	Replacing  $f_n$  with $s_n =\sum_{k=0}^n f_k$ in Theorem~\ref{chap7-thm25} yields the result.
+\end{proof}
+\begin{remark}
+	 A version of Theorem~\ref{chap7-thm25} for Riemann-Stieltjes integrable functions  is given in exercises at the end of this section.
+\end{remark}
+\subsection*{Termwise Differentiation}
+
+ In Example~\ref{chap7-ex11}, we discussed an example of sequence $\{f_n\}$ of  differentiable functions on $[-1, 1]$ that converges to  a differentiable function $f$ pointwise on  $[-1, 1]$ and  the sequence of derivatives $f'_n$ converges to  $g$ pointwise $[-1, 1]$,  but  $f'\ne g$   on $[-1, 1]$.  In addition, we showed in Example~\ref{chap7-ex16} for the sequence $\{f_n\}$  considered in Example~\ref{chap7-ex11} that  $f_n\to f$ uniformly on $[-1,1]$. This means that  the uniform convergence of a sequence of differentiable functions  $f_n$ to a differentiable function $f$ on an interval $[a, b]$ is not sufficient for  $\{f'_n\}$ to converge to $f'$ pointwise on $[a, b].$   It turns out that uniform convergence of $\{f'_n\}$ on $[a, b]$  and convergence of $\{f_n(x_0)\}$ for some point $x_0\in [a, b]$ are sufficient conditions for allowing us to interchange the differentiation and limit operations.  We will show that uniform convergence of $\{f'_n\}$ on $[a, b]$  and convergence of $\{f_n(x_0)\}$ for some point $x_0\in [a, b]$ ensure the existence of a differentiable function $f$ on $[a, b]$ such that $f_n\to f$ uniformly on $[a, b]$ and $f'_n\to f'$ uniformly on $[a, b].$  We recall that the derivatives at the end points of $[a, b]$ are  one-sided limits.
+
+\begin{thmbar}
+	\begin{theorem}\label{chap7-thm28}
+Let $\{f_n\}$ be a sequence of differentiable functions on $[a, b].$ Suppose that $\{f'_n \}$  converges uniformly on $[a, b]$  and $\{f_n(x_0)\}$ converges for at least one point $x_0\in [a, b].$ Then there exists a differentiable function $f:~[a, b]\to\mathbb R$ such that 
+$f_n \to f$   uniformly on $[a, b]$ and $f'_n \to f'$   uniformly on $[a, b].$
+\end{theorem}
+\end{thmbar}
+\begin{proof}
+Let $\varepsilon>0$ be given. 
+Since $\{f'_n\}$ converges uniformly on $[a, b]$ and $\{f_n(x_0)\}$ converges,  there exists $N\in\mathbb N$ such that for all $n, m\in\mathbb N$ 
+\begin{equation} \label{7-7-4}
+		m,n\ge N \implies \abs{f_m(x_0) - f_n(x_0)}<\frac{\varepsilon}{2}
+\end{equation}	
+and 	
+\begin{equation}\label{7-7-5}
+	m,n\ge N \implies \abs{f'_m(x) - f'_n(x)}<\frac{\varepsilon}{2(b-a)}\quad  \forall x\in [a, b].
+\end{equation}
+For all $ x, t\in [a, b],$  in view of the mean value theorem applied to $f_m- f_n$ on the interval between $x$ and $t$ when $x\ne t$, we have
+\begin{equation}\label{7-7-6}
+\abs{f_m(x) - f_n(x) -f_m(t) + f_n(t)} \le  \frac{\varepsilon \abs{x-t}}{2(b-a)} \le \frac{\varepsilon}{2}
+\end{equation}
+whenever $m,n \ge N.$
+We note that (\ref{7-7-6}) holds obviously  for $x=t$. It follows from (\ref{7-7-6}) with $t=x_0$ that
+\begin{equation}\label{7-7-7}
+	m,n\ge N \implies 	\abs{f_m(x) - f_n(x) -f_m(x_0) + f_n(x_0)} \le \frac{\varepsilon}{2}
+\end{equation}
+for all $x\in [a, b].$
+When $m,n\ge N$,   (\ref{7-7-4}) and (\ref{7-7-7}) yield
+\begin{eqnarray*}
+ \abs{f_m(x) - f_n(x)} &\le&	\abs{f_m(x) - f_n(x) -f_m(x_0) + f_n(x_0)}+ \abs{f_m(x_0) - f_n(x_0)}\\
+	 &<&  \frac{\varepsilon}{2}+ \frac{\varepsilon}{2}\\
+	 &=&\varepsilon
+\end{eqnarray*}
+ for all $x\in [a, b].$
+This shows that $\{f_n\}$ satisfies the Cauchy criterion for uniform convergence on $[a, b].$ By Theorem~\ref{uniform-covergence-Cauchy-criterion}, there exists a function $f:[a, b]\to \mathbb R$ such that $f_n\to f$ uniformly on $[a, b].$
+
+% \begin{xca}
+% 	Let $\{f_n\}$ be a sequence of real-valued functions  defined on $[a, b].$ Let $f:[a, b]\to\mathbb R$  such that $f_n\to f$ uniformly on $[a, b].$ Fix $x \in [a, b],$ and define $g_n$ and $g$ by
+% 	\[g_n(t) = \frac{f_n(t) - f_n(x)}{t-x} \quad\mbox{ and }\quad g(t) = \frac{f(t) - f(x)}{t-x} \mbox{ for all } t\in [a,b]\setminus \{x\}.\]  
+% 	Prove that $g_n\to g$ uniformly on $[a,b]\setminus \{x\}.$ 
+% \end{xca}
+
+ Fix $x \in [a, b],$ and define $g_n$ and $g$ as follows:
+	 \[g_n(t) = \frac{f_n(t) - f_n(x)}{t-x} \quad\mbox{ and }\quad g(t) = \frac{f(t) - f(x)}{t-x} \mbox{ for all } t\in [a,b]\setminus \{x\}.\]  
+	 Since $f_n\to f$ pointwise (since uniformly) on $[a, b]\setminus \{x\}$, it follows that $g_n\to g$ pointwise on $[a,b]\setminus \{x\}.$ In view  of (\ref{7-7-6}), $\{g_n\}$ satisfies the Cauchy criterion for uniform convergence. Hence $g_n\to g$ uniformly on $[a, b]\setminus\{x\}.$ Moreover,  
+	 \[ \lim\limits_{t\to x} g_n (t) = f'_n(x) \quad \mbox{for all }n\in\mathbb N.\]
+Since $x$ is a limit point of $[a, b]\setminus \{x\},$ it follows, by Theorem~\ref{chap7-thm17}, that
+
+	\[\lim\limits_{n\to\infty}\lim\limits_{t\to x} g_n (t) = \lim\limits_{t\to x} \lim\limits_{n\to\infty} g_n (t),\]
+	that is,
+	\[\lim\limits_{n\to\infty} f'_n (x) = \lim\limits_{t\to x}  g (t).\]
+	Thus, $\lim\limits_{t\to x} g (x) $ exists. Hence $f$ is differentiable at $x$ and
+	\[f'(x)=\lim\limits_{n\to\infty} f'_n(x).\qedhere\]
+	 
+%	 To this end, let
+% $\varepsilon>0$ be given. We follow the arguments in the proof of Theorem~\ref{chap7-thm26} with  $x_0$ and $x$ there replaced, respectively,  by $x$ and $t$ here  to obtain   (\ref{7-7-7}), which then gives
+% \[\abs{g_n(t)- g_m(t)}<\frac{\varepsilon}{2(b-a)} \quad \forall m, n\ge N  \mbox{ and }\forall t\in [a, b]\setminus \{x\}.\]
+%This means that $\{g_n\}$ satisfies the Cauchy criterion uniformly on $[a, b]\setminus \{x\}.$
+ 
+ 
+\end{proof}
+
+
+\begin{thmbar}
+	\begin{corollary}[Termwise Differentiation]\label{chap7-cor-7-3-2}
+Let $\sum_{n=0}^{\infty}f_n$ be a series of real-valued  differentiable functions  on an interval $[a, b]$. Suppose  that $\sum_{n=0}^{\infty}f'_n$ converges uniformly on $[a, b]$ and $\sum_{n=0}^{\infty}f_n(x_0)$ converges for at least one point  $x_0\in [a, b].$
+Then there exists a differentiable function $f:[a, b]\to\mathbb R$ such that  
+\begin{enumerate}[label= \textnormal{(\roman*)}]
+	\item\label{7-cor1a} $\sum_{n=0}^{\infty}f_n$ converges to $f$ uniformly on $[a, b],$ and 
+	\item\label{7-cor1b} $\sum_{n=0}^{\infty}f'_n$ converges to $f'$ uniformly on $[a, b].$
+\end{enumerate}
+ In particular,  $ f=\sum_{n=0}^{\infty}f_n$ can be differentiated termwise to obtain
+\[ f'(x)=\sum_{n=0}^{\infty}f'_n(x)  \quad \mbox{ for all } x\in [a, b].\]  
+\end{corollary}
+\end{thmbar}
+\begin{proof}
+Using $s_n =\sum_{k=0}^nf_k$ in place of $f_n$ in Theorem~\ref{chap7-thm28}  yields a proof.
+\end{proof}
+
+
+
+\begin{remark}{$\empty$}
+	\begin{enumerate}[label=(\roman*),nolistsep]
+		\item The  convergence condition on $\{f_n(x_0)\}$ for some $x_0\in [a, b]$ in Theorem~\ref{chap7-thm28} can not be dropped. For example, consider $f_n(x) = x+(-1)^n$ for $x\in [a, b].$ Clearly, $f'_n\to 1$ uniformly on $[a, b],$ but there is no  pointwise limit of $\{f_n\}.$ The key point here is that two functions having the same derivative on $[a, b]$ differ by  a constant.
+		\item  	The continuity of $f'_n$ is not assumed in Theorem~\ref{chap7-thm28}; however,  if each $f'_n$ is continuous on $[a, b]$, then a  simple proof can be given by using the fundamental theorem of calculus. This situation is discussed in Problem~\ref{term-by-term derivative}.
+		\end{enumerate} 
+\end{remark}
+
+
+
+\begin{hardsubsec}
+	\subsection*{*Counterintuitive Examples}
+\end{hardsubsec}
+
+
+\subsubsection*{A Continuous  Nowhere Differentiable Function}
+\subsubsection*{A Space-filling Curve}
+
+\section*{Worked out problems for Section~\thesection}
+
+\begin{problem} 
+	Let $J\subseteq \mathbb R$,  $ f: J\to\mathbb R$,   $n\in\mathbb N$, and   $ f_n: J\to\mathbb R.$ 
+%Let $\{f_n\}$ be a sequence of  real-valued  functions  on $J\subset \mathbb R$ and $f:J\to\mathbb R.$  
+Suppose that each $f_n$ is uniformly continuous on $J$ and $f_n\to f$ uniformly on $J.$  Prove that $f$ is uniformly continuous on $J.$
+\end{problem}
+\begin{solution}
+	Let $\varepsilon>0$ be given. 
+	Since $f_n\to f$ uniformly on $J,$ there exists $N\in\mathbb N$ such that 
+	\[ \abs{f_N(x) - f(x)}< \frac{\varepsilon}{4} \quad \forall x\in J.\] Since $f_N$ is uniformly continuous on $J,$ there exists $\delta>0$  such that for all $x, y\in J$
+	\[\abs{x-y} < \delta \implies \abs{f_N(x) - f_N(y)} < \frac{\varepsilon}{2}.\]
+	Now, for all $x, y\in J$ such that $\abs{x-y}<\delta,$ we have
+	\begin{eqnarray*}
+	\abs{f(x) - f(y)}&\le& \abs{f(x) - f_N(x)}+\abs{f_N(x) - f_N(y)}+\abs{f_N(y) - f(y)}\\
+	&<&  \frac{\varepsilon}{4} +\frac{\varepsilon}{2} +\frac{\varepsilon}{4}\\
+	&=&\varepsilon.
+	\end{eqnarray*}
+	This shows that $f$ is uniformly continuous on $J.$ \qedhere
+\end{solution}
+\begin{problem}
+		Let $\{f_n\}$ be a sequence of real-valued  functions that are integrable on $[a, b]$ and $f:[a, b]\to \mathbb R.$  Suppose that $f_n\to f$ uniformly on $[a, b].$ Prove that $f$ is integrable on $[a, b]$, 
+		\[\lim\limits_{n\to\infty} \int_a^b f_n(x)\, dx\] exists, 
+	 and  	\[\int_a^b f(x)\, dx=\lim\limits_{n\to\infty} \int_a^b f_n(x)\, dx.\]
+\end{problem}
+
+\begin{solution}
+	Since $f_n\to f$ uniformly on $[a, b],$ Theorem~\ref{chap7-thm14} gives
+	\[D_n=\sup_{x\in [a, b]} \abs{f_n(x)-f(x)}\to 0 \mbox{ as } n\to\infty.\]
+		Then  \[ f_n(x) -D_n \le  f(x) \le f_n(x) + D_n\] for all $x\in [a, b].$ This implies that $f$ is bounded on $[a, b],$ and since each $f_n$ is integrable on $[a, b],$ it follows that
+		\[ \int_a^b(f_n(x) -D_n)\, dx \le  \lowint_a^b f(x)\, dx \le \upint_a^b f(x)\, dx\le \int_a^b (f_n(x) +D_n)\, dx.\] Consequently,
+		\[0\le \upint_a^b f(x)-\lowint_a^b f(x)\, dx \le 2D_n (b-a).\]
+		Since $D_n\to 0$ as $n\to\infty,$ it follows that the upper and lower integrals are equal, that is, $f$ is integrable on $[a, b],$ and therefore $f_n-f$ is also integrable on $[a, b].$  The rest of the solution goes verbatim  the second paragraph in the proof of Theorem~\ref{chap7-thm25}.
+		\end{solution}
+
+
+
+
+
+
+
+
+\begin{problem}\label{term-by-term derivative}
+		Let $\{f_n\}$ be a sequence of differentiable functions on $[a, b]$ such that  each $f'_n$ is continuous on $[a, b]$,  $\{f'_n\}$ converges uniformly on $[a, b]$ and $\{f_n(x_0)\}$ converges for at least one point $x_0\in [a, b].$ Then there exists a differentiable function $f:[a, b]\to\mathbb R$ such that 
+	$f'_n \to f'$ uniformly on $[a, b].$ In particular,
+	\[\lim\limits_{n\to\infty} f'_n(x) = f'(x) \quad \mbox{ for all } x\in [a, b].\] 
+	
+
+\end{problem}
+
+\begin{solution}
+	Define $g:[a, b]\to \mathbb R$ by 
+	\[g(x) = \lim\limits_{n\to\infty}f'_n(x), \quad x\in [a, b].\]  Since  $f'_n \to g$ uniformly on $[a, b]$ and each $f'_n$ is continuous on $[a, b],$ it follows from Corollary~\ref{chap7-cor-1} that $g$ is continuous on $[a, b].$ Consequently, $g$ and $f'_n$   are Riemann integrable on  $[a, b].$  Applying Theorem~\ref{chap7-thm25} and the fundamental theorem of calculus, we obtain
+	\[\int_{x_0}^{x} g(t)\, dt = \lim\limits_{n\to\infty}\int_{x_0}^x f'_n (t) \, dt = \lim\limits_{n\to\infty} [f_n(x) - f_n(x_0)] \quad \mbox{ for all } x\in [a, b].\]  Since $\{f_n(x_0)\}$ converges, it follows from the last display that $\{f_n(x)\}$ also converges.  Define $f:[a, b]\to\mathbb R$ by
+	\begin{equation}\label{Prob-7-3-3}
+		f(x) = \lim\limits_{n\to\infty} f_n(x), \quad x\in [a, b].
+		\end{equation} Thus, we get
+	\[\int_{x_0}^x g(t)\, dt  = f(x) - f(x_0) \quad \mbox{ for all } x\in [a, b].\]  Since  $g$ is continuous on $[a, b],$ by the fundamental theorem of calculus, $f$ is differentiable on $[a, b],$ and 
+	$ g(x)=f'(x)$ for all $x\in [a, b].$
+	\end{solution}
+	
+	
+\begin{remark}
+The convergence in (\ref{Prob-7-3-3})  is  uniform. This has been proved for a more general setting in the proof of Theorem~\ref{chap7-thm28}.
+\end{remark}
+
+
+
+\section*{Exercises}
+\setcounter{Exercise}{0}
+\begin{ExerciseList}
+	\Exercise[]\label{exe-7-3-1}
+	For each $n\in\mathbb N,$ consider  $f_n(x) = x^n$ for  $x\in [0, 1).$  		
+	Determine whether $\{f_n\}$ converges uniformly on $[0, 1).$ How does it compare to Example~\ref{chap7-ex19}? Explain.
+	
+	\Exercise[]\label{exe-7-3-2}For each $n\in\mathbb N,$ let  $f_n:\mathbb R\to\mathbb R$ be defined  by
+	\[f_n(x) = \frac{nx}{1+nx^2}, \quad x\in \mathbb R.\]  
+	\begin{enumerate}[label=(\roman*)]
+		\item\label{exe-7-3-1a} Find a function $f:\mathbb R\to\mathbb R$ such  that $f_n\to f$ pointwise on $\mathbb R.$ 
+		\item Determine whether the convergence in \ref{exe-7-3-1a} is  uniform on $\mathbb R.$ 
+	\end{enumerate}
+	
+		
+\Exercise[] Let $\alpha$ be monotonically increasing on $[a, b],$ 	 $\{f_n\}$ be a sequence of real-valued  functions such that $f_n\in R(\alpha)$ on $[a, b]$ for all $n$, and $f:[a, b]\to \mathbb R.$  Suppose that $f_n\to f$ uniformly on $[a, b].$ Prove that $f\in R(\alpha)$ on $[a,b],$ 	\[\lim\limits_{n\to\infty} \int_a^b f_n\, d\alpha\] exists and  	\[\lim\limits_{n\to\infty} \int_a^b f_n\, d\alpha=\int_a^b f\, d\alpha.\]
+ 
+\end{ExerciseList}
+
+
+
+%
+%\begin{hardsec}
+%	\section{Uniform Convergence of Power Series}\label{power-series-2}
+%\end{hardsec}
+
+
+	\section{Uniform Convergence of Power Series}\label{power-series-2}
+An introduction to power series and their fundamental properties were given Section~\ref{power-series-1}. In this section, we explore the uniform convergence of power series.
+
+\begin{thmbar}
+	\begin{theorem}\label{chap7-thm-7-4-1}
+		Let $\sum_{n=0}^{\infty}a_n x^n$ be a power series with real coefficients $a_n$ and the radius convergence of $R$ such that $0<R\le \infty.$ If $K\in (0, R),$ then the power series converges uniformly on $[-K, K].$
+\end{theorem}
+\end{thmbar}
+\begin{proof}
+Suppose that  $K\in (0, R),$ and let $x\in [-K, K].$ Then, for all $n\in \mathbb N\cup \{0\},$ we have
+\[\abs{a_n x^n}\le \abs{a_n} K^n.\] By Theorem~\ref{power-series-convergence-test}, the series $\sum_{n=0}^{\infty}\abs{a_n} K^n$  converges, and therefore, by Theorem~\ref{Weierstrass-M-test},  $\sum_{n=0}^{\infty}a_n x^n$  converges uniformly on $[-K, K].$
+\end{proof}
+
+
+
+\begin{remark} It follows from   Theorem~\ref{chap7-thm-7-4-1} that  a power series  converges uniformly on each compact interval contained in its interval of convergence. However, when the radius of convergence $R$ of a power series is finite,   	 Theorem~\ref{chap7-thm-7-4-2} due to Niels Henrik Abel (1802--1829) shows that the power series converges uniformly on $[0, R]$ if the power series converges at $x=R$ and uniformly on $[-R, 0]$ if the power series converges at $x=-R.$ 
+	\end{remark}
+
+\begin{thmbar}
+	\begin{theorem}[Abel's Theorem]\label{chap7-thm-7-4-2}
+	Let $R\in (0, \infty)$ be the radius of convergence of $\sum_{n=0}^{\infty}a_n x^n$.  If  $\sum_{n=0}^{\infty}a_n R^n$ converges, then the power series converges uniformly on $[0, R].$ Likewise, if $\sum_{n=0}^{\infty}a_n (-R)^n$ converges, then the power series converges uniformly on $[-R, 0].$
+\end{theorem}
+\end{thmbar}
+\begin{proof}
+The power series  $\sum_{n=0}^{\infty}a_n x^n$  reads
+$\sum_{n=0}^{\infty}a_n R^n z^n$  with  $z= x/R$ for all $x$ in the interval of convergence of $\sum_{n=0}^{\infty}a_n x^n.$
+Since \[\limsup_{n\to\infty}\abs{a_n R^n}^{1/n} = R \limsup_{n\to\infty}\abs{a_n}^{1/n} = 1,\]
+we may assume, without loss of generality, that $R=1.$
+Suppose that  $\sum_{n=0}^{\infty}a_n x^n$ converges at $x=1.$ Put \[f_n(x) = \sum_{k=0}^{n} a_kx^k, \quad n\in\mathbb N\cup \{0\}.\]
+Then $\{f_n(1)\}$ converges.
+We show that $\{f_n\}$ converges uniformly on $[0, 1]$. In view of Theorem~\ref{uniform-covergence-Cauchy-criterion}, it suffices to show that $\{f_n\}$ satisfies the Cauchy criterion for uniform convergence on $[0, 1.]$ 
+
+Let $\varepsilon>0$ be given. Since $\{f_n(1)\}$ converges, there exists $N\in\mathbb N$ such that for all $m,n\in\mathbb N$ and all $x\in [0, 1]$
+\begin{equation}\label{chap7-12}
+	m,n\ge N \implies \abs{f_n(1)- f_m(1)} < \varepsilon.
+\end{equation}
+Fix $m\in \mathbb N$ such that $m\ge N.$  For  $k\in\mathbb N$, put 
+\[s_k = a_{m+1}+ \cdots+ a_{m+k}.\]
+ Then,  for each $k\in\mathbb N$,   (\ref{chap7-12}) with  $n = m+k$ implies
+\begin{equation}\label{chap7-13}
+	\abs{s_k}= \abs{f_{m+k}(1)- f_m(1)}  <\varepsilon.
+	\end{equation}
+ For $n = m+k,$ we  compute
+\begin{eqnarray*}
+f_n(x) - f_m(x)	&=&a_{m+1} x^{m+1} + \cdots+ a_{m+k}x^{m+k}\\ 
+	&=& s_1 x^{m+1}+ (s_2-s_1) x^{m+2}+ \cdots+  (s_{k}-s_{k-1}) x^{m+k} \\
+	&=&  s_1( x^{m+1} - x^{m+2}) + s_2(x^{m+2}- x^{m+3}) + \cdots\\
+	&&+ s_{k-1}(x^{m+k-1}- x^{m+k}) + s_k x^{m+k}\\
+	&=& x^{m+1}(1-x) (s_1+ s_2 x+ \cdots+ s_{k-1}x^{k-2}) + s_k x^{m+k}
+\end{eqnarray*}
+Thus, for all $x\in [0, 1),$  in view of (\ref{chap7-13}), we get
+\begin{eqnarray*}
+	\abs{f_n(x) - f_m(x)}&\le & x^{m+1}(1-x) (\varepsilon+ \varepsilon x+ \cdots+ \varepsilon x^{k-2}) + \varepsilon x^{m+k}\\
+	&=& \varepsilon x^{m+1}(1-x)( 1+ x+ \cdots+ x^{k-2}) +\varepsilon x^{m+k}\\
+	&=& \varepsilon x^{m+1} (1- x^{k-1}) +\varepsilon x^{m+k}\\
+	&=&  \varepsilon \left(  x^{m+1} - x^{m+k} + x^{m+k}\right)\\
+	&\le& \varepsilon x^{m+1}\\
+	&<&\varepsilon.
+\end{eqnarray*}
+This is also true for $x=1$  as  seen in (\ref{chap7-13}).   We note that  $m$ and $n$ can be swapped.  Thus, $\{f_n\}$ satisfies the Cauchy criterion for uniform convergence on $[0, 1].$
+
+Finally, suppose that $\{f_n(-1)\}$ converges. The power series $\sum_{n=0}^{\infty} a_n (-1)^n x^n$ also has $R=1$ and converges at $x=1.$ By the first part of the proof, $\sum_{n=0}^{\infty} a_n (-1)^n x^n$ converges uniformly on $[0, 1]$ and hence  $\sum_{n=0}^{\infty} a_n  x^n$ converges uniformly on $[-1, 0].$
+\end{proof}
+\begin{thmbar}
+\begin{theorem}
+	Let $R$ be the radius of convergence of a power series $\sum_{n=0}^{\infty}a_n x^n$ which  converges pointwise on its interval of convergence to a function $f$. Then $f$ is  continuous on the interval of convergence.
+\end{theorem}
+\end{thmbar}
+
+\begin{proof}Let $x_0$ be a real number in the interval of convergence. 
+	If $x_0\in (-R, R)$, then choose a number $K>0$ such that $x_0\in [-K, K]\subset (-R, R).$ By Theorem~\ref{chap7-thm-7-4-1},  the power series converges uniformly on  $[-K, K].$    
+	Put $f_n(x) = a_n x^n, x\in [-K, K].$  Since each $f_n$ is continuous at  $x_0\in [-K, K]$ and $\sum_{n=0}^{\infty}f_n$  converges uniformly on $[-K, K],$ it follows from Theorem~\ref{chap7-thm-24} that $f$ is continuous  at $x_0$. 
+	If $x_0 = R$ or $x_0 = -R,$ by Theorem~\ref{chap7-thm-7-4-2},  the power series converges uniformly on $[0, R]$  or  $[-R, 0],$ respectively.  With $f_n$ defined as above on  $[0, R]$ or $[-R, 0]$,  each $f_n$ is continuous at $x_0$, and  it follows from  Theorem~\ref{chap7-thm-24} that $f$ is continuous  at $x_0$.
+\end{proof}
+\begin{thmbar}
+	\begin{theorem}\label{chap7-thm-7-4-3}
+	Suppose that $\sum_{n=0}^{\infty}a_n x^n$ converges  to a function $f$ on a compact interval $[a, b]$ that is contained in the interior of   interval of convergence. Then 
+	\[\int_a^b f(x)\, dx  =\sum_{n=0}^{\infty}\frac{a_n}{n+1}\left(b^n-a^n\right).\]
+	%where \[s_n(x)= \sum_{k=0}^{n} a_k x^k, \quad n\in\mathbb N\cup \{0\}.\]
+\end{theorem}
+\end{thmbar}
+\begin{proof}
+	Define $f_n(x) = a_n x^n$, $n\in\mathbb N\cup \{0\}.$ By Theorem~\ref{chap7-thm-7-4-1},  $\sum_{n=0}^{\infty} f_n(x)$ converges uniformly on $[a, b],$ and  since each $f_n$ is continuous on $[a, b],$ it follows from Corollary~\ref{chap7-cor-7-3-1} that
+	\[\int_a^b f(x)\, dx = \sum_{n=0}^{\infty}\int_a^b f_n(x)\, dx =\sum_{n=0}^{\infty}\frac{a_n}{n+1}\left(b^n-a^n\right).\]
+
+\end{proof}
+
+\begin{thmbar}
+	\begin{theorem}\label{chap7-thm-7-4-4}
+	Let $R$ be the radius of convergence of 
+ $\sum_{n=0}^{\infty}a_n x^n$ such that $0<R\le \infty.$  Suppose that the power series converges to a function $f$ on $(-R, R).$ Then $f$ is differentiable on $(-R, R)$ and 
+\[f'(x) = \sum_{n=1}^{\infty}na_n x^{n-1}, \quad x\in (-R, R).\]
+\end{theorem}
+\end{thmbar}
+\begin{proof}
+	Since $R>0$, it follows from Theorem~\ref{power-series-convergence-test} that 
+	\[\limsup_{n\to\infty} \abs{a_n}^{1/n} =\frac{1}{R}<\infty.\]  Using this and
+	\[\lim\limits_{n\to \infty} n^{1/n} = 1,\] we obtain
+		\[\limsup_{n\to\infty} \abs{na_n}^{1/n} = \limsup_{n\to\infty} \abs{a_n}^{1/n} <\infty.\] It follows that both $\sum_{n=0}^{\infty}a_n x^n$ and $\sum_{n=1}^{\infty}na_n x^{n-1}$ have the same radius of convergence. 
+		 Let $K\in (0, R).$ Then, by Theorem~\ref{chap7-thm-7-4-1}, $\sum_{n=1}^{\infty}na_n x^{n-1}$ converges uniformly on $[-K, K].$ Since  $\sum_{n=0}^{\infty}a_n x^n$ converges pointwise (in fact, uniformly) on $[-K, K]$ to $f$,   Corollary~\ref{chap7-cor-7-3-2} applies, and therefore
+		\[f'(x) = \sum_{n=1}^{\infty}na_n x^{n-1}, \quad x\in [-K, K].\] Since $K$ is an arbitrary point in $(0, R),$ we conclude
+		\[f'(x) = \sum_{n=1}^{\infty}na_n x^{n-1}, \quad x\in (-R, R).\qedhere\]
+\end{proof}
+
+\begin{remark}  Theorem~\ref{chap7-thm-7-4-4} shows that a power series can be differentiated termwise at any interior point of its interval of convergence. 	When a power series converges at an endpoint of its interval of convergence but the corresponding termwise differentiated power series does not converge at that endpoint, we are not permitted to differentiate the power series termwise at that endpoint. The  series $\sum_{n=0}^{\infty} \frac{x^{n+1}}{n+1}$  has this property at $x=-1.$ 
+\end{remark}
+
+\begin{xca}
+	Prove that a power series   can be differentiated termwise infinitely many times at each point in the interior of   interval of convergence.
+\end{xca}
+
+
+
+\begin{xca}
+ Find a power series that can  be differentiated termwise only two times at an endpoint of its interval of convergence.
+\end{xca}
+
+
+
+\section*{Worked out problems for Section~\thesection}
+\section*{Exercises}
+\setcounter{Exercise}{0}
+\begin{ExerciseList}
+	\Exercise[]Insert exercise
+	\Exercise[]Insert exercise
+\end{ExerciseList}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%Bibliography
+\vspace{0.25in}
+%\addcontentsline{toc}{section}{Bibliography}
+%List the items cited from the references.bib file
+\nocite{Royden, Rudin}
+
+\bibliographystyle{abbrvnat}
+\bibliography{references}

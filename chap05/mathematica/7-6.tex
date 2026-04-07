@@ -1,0 +1,40 @@
+%% AMS-LaTeX Created with the Wolfram Language : www.wolfram.com
+
+\documentclass{article}
+\usepackage{amsmath, amssymb, graphics, setspace}
+
+\newcommand{\mathsym}[1]{{}}
+\newcommand{\unicode}[1]{{}}
+
+\newcounter{mathematicapage}
+\begin{document}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{(*Define the system*)}\text{sol}=\text{DSolve}[\{\text{x1}\text{''}[t]\text{==}-5\text{x1}[t]+2\text{x2}[t],\text{x2}\text{''}[t]\text{==}2\text{x1}[t]-2\text{x2}[t],\text{x1}[0]\text{==}0,\text{x1}'[0]\text{==}-1,\text{x2}[0]\text{==}0,\text{x2}'[0]\text{==}1\},\{\text{x1}[t],\text{x2}[t]\},t]}\\
+\pmb{}\\
+\pmb{\text{(*To extract and display the solutions*)}}\\
+\pmb{\text{x1sol}=\text{x1}[t]\text{/.} \text{sol}[[1]];}\\
+\pmb{\text{x2sol}=\text{x2}[t]\text{/.} \text{sol}[[1]];}\\
+\pmb{}\\
+\pmb{\text{(*}\text{Optional}:\text{Plot} \text{the} \text{solutions}\text{*)}}\\
+\pmb{\text{Plot}[\{\text{x1sol},\text{x2sol}\},\{t,0,10\},\text{PlotLegends}\text{-$>$}\{\text{{``}x1(t){''}},\text{{``}x2(t){''}}\},\text{PlotStyle}\text{-$>$}\{\text{Blue},\text{Red}\},\text{AxesLabel}\text{-$>$}\{\text{t},\text{x}\},\text{PlotLabel}\text{-$>$}\text{{``}Solutions
+of the System{''}}]}\\
+\pmb{\text{Export}[\text{{``}plot.tex{''}},\text{plot},\text{{``}TeX{''}}]}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\left\{\left\{\text{x1}[t]\to \frac{1}{5} \left(\text{Sin}[t]-\sqrt{6} \text{Sin}\left[\sqrt{6} t\right]\right),\text{x2}[t]\to \frac{1}{10}
+\left(4 \text{Sin}[t]+\sqrt{6} \text{Sin}\left[\sqrt{6} t\right]\right)\right\}\right\}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\begin{array}{cc}
+  &  \\
+\end{array}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\text{plot.tex}\)
+\end{doublespace}
+
+\end{document}

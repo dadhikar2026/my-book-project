@@ -1,0 +1,641 @@
+\documentclass[pagenumber]{book}
+%\usepackage{times}
+%\usepackage{newtx}
+%\usepackage{pagecolor}
+%\usepackage[tagged, highstructure]{accessibility}
+
+\usepackage{makeidx}
+\makeindex % Initialize an index so we can add entries with \index
+
+\usepackage[bindingoffset=0.625in,
+left=.5in, right=.5in,
+top=.8125in, bottom=.9375in,
+paperwidth=6.375in, paperheight=9.25in]{geometry}
+
+%for electrical circuits
+\usepackage[american, cuteinductors]{circuitikz}
+\usepackage{subcaption}
+\usepackage{caption}
+
+
+\usepackage{booktabs}      % for \toprule, \midrule, \bottomrule
+\usepackage[table]{xcolor} % for row coloring (\rowcolors) and table shading
+\usepackage{array} 
+\definecolor{tablegray}{gray}{0.93}
+\newcounter{tableitem}
+\newcommand{\resetitems}{\setcounter{tableitem}{0}}
+\newcommand{\rownumber}{\stepcounter{rownum}\arabic{rownum}.}
+\newcommand{\nextitem}{\stepcounter{tableitem}\arabic{tableitem}.}
+\usepackage{multirow}
+
+
+%\usepackage[left=3cm,right=2.5cm,top=2.7cm,bottom=3cm]{geometry}
+
+\usepackage[titletoc]{appendix}
+\usepackage{booktabs}
+\usepackage{xparse}
+\usepackage{tikz}
+\usepackage{tkz-fct} 
+\usepackage{mathrsfs}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.markings}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+
+
+%%%titlepage
+\usepackage{xcolor}
+\usepackage{lipsum} % for dummy text
+\usepackage{titlesec}
+\usepackage{graphicx}
+%%% For exercises
+\usepackage{tcolorbox}
+\usepackage{answers}
+\usepackage{mdframed}
+
+\usetikzlibrary{matrix}
+
+
+
+%%%TOC%%%
+% \usepackage{etoc}
+\usepackage[english]{babel}
+% \usepackage{titlesec}
+\usepackage[undotted]{minitoc}
+% \usepackage{lipsum}
+\addto{\captionsenglish}{% Making babel aware of special titles
+  \renewcommand{\mtctitle}{} %Add title
+  }
+
+
+%Exercises and solutions
+\newcommand\dunderline[3][-1pt]{{%
+		\sbox0{#3}%
+		\ooalign{\copy0\cr\rule[\dimexpr#1-#2\relax]{\wd0}{#2}}}}
+
+\usepackage{ifthen}
+\newboolean{firstanswerofthechapter}  
+
+\usepackage{xcolor}
+\colorlet{lightcyan}{cyan!40!white}
+
+\usepackage{chngcntr}
+\usepackage{stackengine}
+
+\usepackage{tasks}
+\newlength{\longestlabel}
+\settowidth{\longestlabel}{\bfseries viii.}
+\settasks{label=\roman*., label-format={\bfseries}, label-width=\longestlabel,
+	item-indent=20pt, label-offset=2pt, column-sep={10pt}}
+
+\usepackage[lastexercise,answerdelayed]{exercise}
+\counterwithin{Exercise}{chapter}
+\counterwithin{Answer}{chapter}
+\renewcounter{Exercise}[chapter]
+\newcommand{\QuestionNB}{\bfseries\arabic{Question}.\ }
+\renewcommand{\ExerciseName}{\textbf{Exercises}}
+\renewcommand{\ExerciseHeader}{\noindent\def\stackalignment{l}% code from https://tex.stackexchange.com/a/195118/101651
+	\stackunder[0pt]{\textcolor{blue}{\dunderline[-3pt]{3pt}{\colorbox{yellow}{\textcolor{black}{\textbf{\LARGE\ExerciseName\;\LARGE\ExerciseHeaderNB}}}}}}{\textcolor{blue}{\rule{\linewidth}{1.5pt}}}\medskip\medskip\medskip}
+%\stackunder[0pt]{\colorbox{cyan}{\textcolor{white}{\textbf{\LARGE\ExerciseHeaderNB\;\large\ExerciseName}}}}{\textcolor{lightcyan}{\rule{\linewidth}{2pt}}}\medskip}
+\renewcommand{\AnswerName}{Exercises}
+\renewcommand{\AnswerHeader}{\ifthenelse{\boolean{firstanswerofthechapter}}%
+{\bigskip\noindent\textcolor{cyan}{\textbf{CHAPTER \thechapter}}\newline\newline%
+	\noindent\bfseries\emph{\textcolor{cyan}{\AnswerName\ \ExerciseHeaderNB, page %
+			\pageref{\AnswerRef}}}\smallskip}
+{\noindent\bfseries\emph{\textcolor{cyan}{\AnswerName\ \ExerciseHeaderNB, page \pageref{\AnswerRef}}}\smallskip}}
+\setlength{\QuestionIndent}{16pt}
+
+
+
+%%Bibliography%%%
+
+ \usepackage[semicolon, square, sort&compress, numbers]{natbib}  %
+ \usepackage[sectionbib]{chapterbib}  
+
+%%%%%
+
+%%%Fonts%%%%
+\usepackage{lmodern}
+
+%\usepackage{newtxtext}
+%\usepackage{newtxmath} 
+%\usepackage{mathptmx}
+%%%%%
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsfonts,amssymb,mathrsfs} 
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage[lastexercise, answerdelayed]{exercise}
+\usepackage{hyperref}
+\usepackage{makeidx}
+\usepackage{bbm}
+\usepackage{cases}
+
+
+\usepackage[T1]{fontenc}
+\usepackage[font=small,skip=0pt]{caption}
+\usepackage{float}
+
+%%%%%
+\usepackage{cleveref} %added by Dhruba
+\renewcommand{\qedsymbol}{\ensuremath{\blacksquare}}
+%%%%%
+
+\newcommand{\ds}{\displaystyle}
+
+%%%%%
+
+%%%%Add hard section with *
+\usepackage{tocloft}
+\usepackage{lipsum} % for dummy text
+\newenvironment{hardsec}
+{\renewcommand{\thesection}{\thechapter.\arabic{section}*}}
+{}
+\newenvironment{hardsubsec}
+{\renewcommand{\thesubsection}{\thesection.\arabic{subsection}*}}
+{}
+% set section numbers in TOC flush right (from the tocloft documentation)
+\newlength{\extralen}
+\setlength{\extralen}{0em}    % need some extra space at end of number
+%\renewcommand{\cftsecpresnum}{\hfill} % note the double ‘l’ 
+\renewcommand{\cftsecpresnum}{} % note the double ‘l’ This is to flushleft the section number
+\renewcommand{\cftsecaftersnum}{\hspace*{\extralen}}
+\addtolength{\cftsecnumwidth}{\extralen}
+
+\setlength{\extralen}{-0.5em}    % need some extra space at end of number
+%\renewcommand{\cftsubsecpresnum}{\hfill} % note the double ‘l’ 
+\renewcommand{\cftsecpresnum}{} % note the double ‘l’ This is to flushleft the subsection number
+\renewcommand{\cftsubsecaftersnum}{\hspace*{\extralen}}
+\addtolength{\cftsubsecnumwidth}{\extralen}
+
+%%%%Geogebra input%%%
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+
+
+%%%%
+%\usepackage{tgschola}
+%\usepackage{lmodern}
+%font
+\usepackage{microtype}
+
+%\usepackage[lf]{venturis}
+\RequirePackage{relsize}
+\RequirePackage[shortlabels,inline]{enumitem}
+\title{Elementary Ordinary Differential Equations}
+\newcommand{\booksubtitle}{Methods and Applications}
+\newcommand{\booklicense}{Creative Commons Zero 1.0 Universal}
+
+\makeatletter
+\newcommand*{\defeq}{\mathrel{\rlap{%
+                     \raisebox{0.3ex}{$\m@th\cdot$}}%
+                     \raisebox{-0.27ex}{$\m@th\cdot$}}%
+                     =}
+\makeatother
+
+\author{Dhruba R. Adhikari}
+
+% \institute{Kennesaw State University, Georgia, USA \&
+%   Fort Valley State University, Georgia, USA}
+% Author subtitle could be a university or a geographical location, for example
+\newcommand{\authorsubtitle}{City, Country}
+
+% Create convenient commands \booktitle and \bookauthor
+\makeatletter
+\newcommand{\booktitle}{\@title}
+\newcommand{\bookauthor}{\@author}
+\makeatother
+
+% This utf8 declaration is not needed for versions of latex > 2018 but may
+% be helpful for older software. Eventually it may not be worth keeping.
+\usepackage[utf8]{inputenc}  
+\usepackage{fix-cm}  % this package allows large \fontsize
+\usepackage{tikz}    % this is for graphics. e.g. rectangle on title page
+
+
+
+\setitemize{labelsep=0.25cm,labelindent=1.5em,leftmargin=*}
+\setenumerate{labelsep=0.25cm,labelindent=1.5em,leftmargin=*}
+% Used by equations
+
+% The following dimensions specify 4.75" X 7.5" content on 6 3/8" by 9 1/4"
+% paper. The paper width and height can be tweaked as required and the content
+% should size to fit within the margins accordingly.
+%
+% The (inside) bindingoffset should be larger for books with more pages. Some
+% standard recommended sizes are .375in minimum up to 1in for 600+ page books.
+% Sizes .75in and .875in are also recommended roughly at 150 and 400 pages.
+
+% Here is an alternative geometry for reading on letter size paper:
+% \usepackage[margin=.75in, paperwidth=8.5in, paperheight=11in]{geometry}
+
+\renewcommand{\contentsname}{Contents} % default is {Contents}
+
+
+% The next few commands are for creating fake content to fill out the template.
+% You should delete this (e.g.  everything up to, but not including,
+% \begin{document}) after you insert your own content.
+% Example content from Einstein's Meaning of Relativity.
+% Public domain book: http://www.gutenberg.org/ebooks/36276
+\newcommand{\fakeparagraph}{The theory of relativity is intimately connected
+with the theory of space and time. I shall therefore begin with a brief
+investigation of the origin of our ideas of space and time, although in
+doing so I know that I introduce a controversial subject. The object of all
+science, whether natural science or psychology, is to co-ordinate our
+experiences and to bring them into a logical system. How are our customary
+ideas of space and time related to the character of our experiences?}
+
+\newcommand{\fakecontent}{
+\fakeparagraph{}
+\fakeparagraph{}
+
+\fakeparagraph{}}
+
+% \newcommand{\fakesections}{
+% \fakecontent{}
+% \section{First Principles}\fakecontent{}
+% \subsection{Examples}\fakecontent{}
+% \subsection{Excessive Elaborations}\fakecontent{}
+% \subsection{Long Winded Conclusion}\fakecontent{}
+% \subsection{Exercises}\fakecontent{}
+% \section{Theory vs Practice}\fakecontent{}
+% \subsection{Examples}\fakecontent{}
+% \subsection{Excessive Elaborations}\fakecontent{}
+% \subsection{Long Winded Conclusion}\fakecontent{}
+% \subsection{Exercises}\fakecontent{}
+% \foreach \x in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z}
+%     {\index{\x 1}\index{\x 2}}
+% }
+
+\numberwithin{section}{chapter}
+\numberwithin{equation}{chapter}
+\renewcommand{\mathbf}{\mathbb}
+\renewcommand{\b}{\mathbf}
+\renewcommand{\d}{\:{\rm d}}
+\renewcommand{\l}{\langle}
+\renewcommand{\r}{\rangle}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\L}{\mathscr{L}}
+
+
+% Content Starts Here
+
+
+%\renewcommand{\vec}{\boldsymbol}
+\renewcommand{\vec}{\textbf}
+
+
+%\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{prop}[theorem]{Proposition}
+%\newtheorem{principle}[theorem]{Principle}
+\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{corollary}{Corollary}[theorem]
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}%[theorem]
+ \newtheorem{example}{Example}[section]
+ \newtheorem{problem}{Problem}[section]
+ %\newtheorem{remark}[theorem]{Remark}
+ \newtheorem{remark}{Remark}[section]
+ \newtheorem{xca}{\includegraphics[width=0.035\linewidth]{ex2.jpg}\hspace{1ex}Exercise}[section]
+
+%%%
+\newenvironment{solution}
+{\renewcommand\qedsymbol{$\clubsuit$ }\begin{proof}[Solution]}
+	{\end{proof}}
+	
+	
+
+
+\newenvironment{change}{
+  \begin{enumerate}[label=\small\protect\circled{\arabic*}]}{
+  \end{enumerate}}
+\def\upint{\mathchoice%
+    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  \int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+\allowdisplaybreaks[1]
+%\setlength\parindent{0pt}
+%\setlength{\parskip}{-0.2 em}
+
+
+
+%%%%%%%
+\usepackage{framed}
+\renewenvironment{leftbar}[1][\hsize]
+{% 
+	\def\FrameCommand 
+	{%
+	{\hspace{-2pt}\color[rgb]{0,0,0}\vrule width 1pt}% {.5, 0,0}
+		\hspace{1pt}%must no space.
+		\fboxsep=\FrameSep\colorbox[rgb]{0.9,0.95,0.95}
+  %{0.8,1,1}%{0.95,0.95,0.95}%
+	}%
+	\MakeFramed{\hsize#1\advance\hsize-\width\FrameRestore}%
+}
+{\endMakeFramed}
+\setlength{\FrameSep}{4pt}
+%%%%%%%
+
+
+\newtheorem{thmbar}{Theorem}[chapter]
+\usepackage{framed}
+\renewenvironment{thmbar}[1][\hsize]
+{% 
+	\def\FrameCommand 
+	{%
+		{\hspace{-2pt}\color[rgb]{0,0,0}\vrule width 1pt}%
+		\hspace{1pt}%must no space.
+		\fboxsep=\FrameSep\colorbox[rgb]{ 0.8,0.9,0.98}%{0.98,0.98,0.9}%
+	}%
+	\MakeFramed{\hsize#1\advance\hsize-\width\FrameRestore}%
+}
+{\endMakeFramed}
+\setlength{\FrameSep}{4pt}
+
+%\maketitle
+
+
+%%%%%%%%%%%
+
+\definecolor{coverblue}{RGB}{0, 56, 123}
+\definecolor{goldenyellow}{RGB}{255, 204, 0}
+
+%Evronment for tabular method of integration by parts
+	\tikzset{Arrow Style/.style={text=black, font=\boldmath}}
+
+\newcommand{\tikzmark}[1]{%
+	\tikz[overlay, remember picture, baseline] \node (#1) {};%
+}
+
+\newcommand*{\XShift}{0.5em}
+\newcommand*{\YShift}{0.5ex}
+
+\NewDocumentCommand{\DrawArrow}{s O{} m m m}{%
+	\begin{tikzpicture}[overlay,remember picture]
+		\draw[->, thick, Arrow Style, #2] 
+		($(#3.west)+(\XShift,\YShift)$) -- 
+		($(#4.east)+(-\XShift,\YShift)$)
+		node [midway,above] {#5};
+	\end{tikzpicture}%
+}	
+
+
+
+
+
+\begin{document}
+\frontmatter
+
+% ---- Half Title Page ----
+% current geometry will be restored after title page
+\newgeometry{top=1.75in,bottom=.5in}
+\begin{titlepage}
+%\begin{flushleft}
+%
+%% Title
+%\textbf{\fontfamily{qcs}\fontsize{14}{25}\selectfont Elementary Ordinary Differential Equations\\}
+%
+%% Draw a line 4pt high
+%\par\noindent\rule{\textwidth}{5pt}\\
+%
+%% Subtitle
+%% Shaded box from left to right. Text node is midway (centered).
+%\begin{tikzpicture}
+%\shade[bottom color=lightgray,top color=white]
+%    (0,0) rectangle (\textwidth, 1)
+%    node[midway] {\textbf{\Large \textit{\booksubtitle}}};
+%\end{tikzpicture}
+%
+%% Edition Number
+%
+%\begin{flushright}
+%\Large\textbf {First Edition}
+%\end{flushright}
+%
+%\vspace{\fill}
+%\author{D. R. Adhikari}
+%\begin{flushright}
+%\textbf{
+%\LARGE Dhruba R. Adhikari
+%}
+%\end{flushright}
+%
+%
+%
+%% \vspace{\fill}
+%\vspace{\fill}
+%
+%\end{flushleft}
+% TODO: \usepackage{graphicx} required
+% Blue background with TikZ
+
+
+%Book Cover
+\textcolor{red}{open this cover page}
+
+%\definecolor{ao}{rgb}{0, 0.35, 0.68}
+%\pagecolor{ao}
+%\begin{figure}
+%	\vspace{-3.2cm}
+%\hspace{-1cm}
+%	\includegraphics[scale=.39]{cover-y}
+%
+%\end{figure}
+
+
+
+\end{titlepage}
+\restoregeometry
+% ---- End of Half Title Page ----
+
+\newpage
+\nopagecolor
+% No page numbers on the Frontispiece page
+\thispagestyle{empty}
+
+
+% ---- Title Page ----
+% current geometry will be restored after title page
+\newgeometry{top=1in,bottom=.5in}
+\begin{titlepage}
+\begin{flushleft}
+
+% Title
+%\textbf{\fontfamily{qcs}\fontsize{45}{54}\selectfont Real Analysis\\}
+\textbf{\fontfamily{qcs}\fontsize{14}{25}\selectfont Elementary Ordinary Differential Equations\\}
+
+% Draw a line 4pt high
+\par\noindent\rule{\textwidth}{4pt}\\
+
+% Shaded box from left to right with Subtitle
+% The text node is midway (centered).
+
+%\textcolor{red}{open this inside page}
+
+\begin{tikzpicture}
+\shade[bottom color=lightgray,top color=white]
+    (0,0) rectangle (\textwidth, 1)
+    node[midway] {\textbf{\Large \textit{\booksubtitle}}};
+\end{tikzpicture}
+
+% Edition Number
+\begin{flushright}
+\textbf{
+\Large First Edition}
+\end{flushright}
+\vspace{\fill}
+\begin{flushright}
+\textbf{
+\LARGE Dhruba  R. Adhikari\\[1ex]
+\large Kennesaw State University\\
+Georgia, USA
+}
+\end{flushright}
+
+\vspace{\fill}
+
+% % Author and Location
+% \textbf{\large \bookauthor}\\[3.5pt]
+% \textbf{\large \textit{\authorsubtitle}}
+
+\vspace{\fill}
+
+% Self Publishing Logo. Free to use: CC0 license.
+% The source file is book.svg. If you change the svg, you must then convert
+% it to pdf. There are many online and offline tools available to do that.
+\begin{center}
+%\includegraphics{booksvg.pdf}\\[4pt]
+%\fontfamily{lmtt}\small{KendallHunt Publishing Company\\Dubuque, Iowa}
+%Seattle San Francisco New York\\
+%London Paris Rome Beijing Barcelona}
+\end{center}
+
+\end{flushleft}
+
+\end{titlepage}
+\restoregeometry
+% ---- End of Title Page ----
+
+% Do not show page numbers on colophon page
+\thispagestyle{empty}
+
+\begin{flushleft}
+
+%Dedication
+\vspace*{\fill}
+%\centering{
+%In the loving memory of my parents\\
+%\smallskip\smallskip
+%To my beloved wife, Bhagabati\\
+%\smallskip\smallskip
+%To our children, Shreya and Shrish\\}
+
+
+
+%\smallskip\smallskip
+%To my beloved wife, Bhagabati,\\
+%whose unwavering support has uplifted me always.\\
+%\smallskip\smallskip
+%To my children, Shreya and Shrish,\\
+%whose patience and love have been my strength and motivation.\\
+%%This book was typeset using \LaTeX{} software.\\
+\vspace{\fill}
+Copyright \textcopyright{} \the\year{}  \bookauthor\\
+%License: \booklicense
+\end{flushleft}
+
+% A title page resets the page # to 1, but the second title page
+% was actually page 3. So add two to page counter.
+\addtocounter{page}{2}
+
+% The asterisk excludes chapter from the table of contents.
+\chapter*{Preface}
+% \fakeparagraph{}
+% \[
+% \left.
+% \begin{aligned}
+%   &\sqrt{{dX_{1}}^{2} + {dX_{2}}^{2} + {dX_{3}}^{2}} \\
+%   &\qquad
+%   \begin{aligned}
+%   &= \left(1 + \frac{\kappa}{8\pi} \int \frac{\sigma\, dV_{0}}{r}\right)
+%      \sqrt{{dx_{1}}^{2} + {dx_{2}}^{2} + {dx_{3}}^{2}}, \\
+% dT &= \left(1 - \frac{\kappa}{8\pi} \int \frac{\sigma\, dV_{0}}{r}\right) dl.
+% \end{aligned}
+% \end{aligned}
+% \right\}
+% \]
+% \fakecontent{}
+% \fakecontent{}
+
+% Three-level Table of Contents
+\clearpage
+% \dominitoc %this is to create mini TOC
+\setcounter{tocdepth}{1} %change {1} to {2} to show subsections in toc  and {3} to show subsubsection, etc
+\setcounter{minitocdepth}{2} \setlength{\mtcindent}{24pt} \renewcommand{\mtcfont}{\small\rm}% default default default 
+\renewcommand{\mtcSfont}{\small\bf}
+\addtocounter{chapter}{0} % was replaced from -1
+\dominitoc
+\tableofcontents
+
+
+
+\mainmatter
+\include{chap01/Introduction and Preliminaries}
+\include{chap02/First Order Differential Equations and Applications} 	
+%\include{chap03/Higher Order Linear Differential Equations and Applications}				
+%\include{chap04/Systems of Differential Equations}             %%% Open this one 
+\include{chap05/Laplace Transform Method}       				%%% Open this one 
+                                                                     
+
+%\chapter{Introduction}\fakesections{}
+%\chapter{Theory of Numbers}\fakesections{}
+%\chapter{Irrational and Transcendent Numbers}\fakesections{}
+%\chapter{Complex Numbers}\fakesections{}
+%\chapter{Quaternions and Ausdehnungslehre}\fakesections{}
+%\chapter{Theory of Equations}\fakesections{}
+%\chapter{Substitutions and Groups}\fakesections{}
+%\chapter{Determinants}\fakesections{}
+%\chapter{Quantics}\fakesections{}
+%\chapter{Calculus}\fakesections{}
+%\chapter{Differential Equations}\fakesections{}
+%\chapter{Infinite Series}\fakesections{}
+%\chapter{Theory of Functions}\fakesections{}
+%\chapter{Probabilities and Least Squares}\fakesections{}
+%\chapter{Analytic Geometry}\fakesections{}
+%\chapter{Modern Geometry}\fakesections{}
+%\chapter{Trigonometry and Elementary Geometry}\fakesections{}
+%\chapter{Non-Euclidean Geometry}\fakesections{}
+%\chapter{Bibliography}\fakesections{}
+%\chapter{General Tendencies}\fakesections{}
+
+\chapter*{Answers to all problems}
+\begin{multicols}{2}
+	\raggedcolumns
+	\shipoutAnswer
+\end{multicols}
+
+\begin{appendices}
+	\appendixpage
+	\noappendicestocpagenum
+	\addappheadtotoc
+	\include{chap08/Appendices} %Open it
+\end{appendices}
+
+
+\addcontentsline{toc}{chapter}{Index}
+    \printindex   
+\backmatter
+\end{document}
